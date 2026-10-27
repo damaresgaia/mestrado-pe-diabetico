@@ -1,12 +1,260 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="refresh" content="0; url=desk-research/radar.html">
-  <title>What's on your radar? · Pé Diabético</title>
-  <script>window.location.replace("desk-research/radar.html");</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Desk research · Avaliação do pé diabético no PEC e-SUS APS</title>
+<meta name="description" content="Desk research sobre o formulário de avaliação do pé diabético com classificação de risco no PEC e-SUS APS: objetivo, fontes mapeadas, achados e o gráfico What's on your radar?.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-1: hsl(225, 40%, 97%);
+    --bg-2: hsl(220, 35%, 92%);
+    --ink: hsl(225, 30%, 18%);
+    --ink-soft: hsl(225, 15%, 42%);
+    --line: hsl(222, 70%, 56%);
+    --line-deep: hsl(224, 64%, 44%);
+    --card: rgba(255,255,255,.78);
+
+    --man-bg: hsl(36, 95%, 86%);   --man-edge: hsl(36, 85%, 52%);
+    --dor-bg: hsl(130, 45%, 86%);  --dor-edge: hsl(130, 45%, 42%);
+    --opo-bg: hsl(275, 60%, 91%);  --opo-edge: hsl(275, 45%, 58%);
+    --exp-bg: hsl(335, 85%, 92%);  --exp-edge: hsl(335, 70%, 58%);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Inter', system-ui, sans-serif; color: var(--ink); line-height: 1.55;
+    background: radial-gradient(1200px 800px at 10% -10%, #fff 0%, transparent 60%),
+                radial-gradient(900px 600px at 100% 0%, hsla(222, 90%, 85%, .35) 0%, transparent 60%),
+                linear-gradient(160deg, var(--bg-1), var(--bg-2));
+    min-height: 100vh;
+  }
+  .wrap { width: min(1120px, 100% - 48px); margin: 0 auto; }
+  a { color: var(--line-deep); }
+
+  /* Hero */
+  .hero { padding: 72px 0 40px; display: grid; grid-template-columns: 1.1fr .9fr; gap: 48px; align-items: center; }
+  h1 { font-family: 'Outfit', sans-serif; font-size: clamp(34px, 4.4vw, 52px); line-height: 1.05; letter-spacing: -.015em; }
+  h1 span { background: linear-gradient(90deg, var(--line-deep), hsl(275, 55%, 55%)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .lead { margin-top: 18px; font-size: 17px; color: var(--ink-soft); max-width: 560px; }
+  .lead strong { color: var(--ink); font-weight: 600; }
+  .actions { margin-top: 28px; display: flex; gap: 12px; flex-wrap: wrap; }
+  .btn { display: inline-flex; align-items: center; gap: 10px; padding: 13px 22px; border-radius: 12px; font-weight: 600;
+         font-size: 15px; text-decoration: none; transition: transform .2s, box-shadow .2s, background .2s; }
+  .btn-primary { background: linear-gradient(135deg, var(--line), var(--line-deep)); color: #fff;
+                 box-shadow: 0 14px 28px -14px hsla(224, 64%, 44%, .8); }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 18px 32px -14px hsla(224, 64%, 44%, .9); }
+  .btn-ghost { background: var(--card); color: var(--ink); border: 1px solid rgba(255,255,255,.95); }
+  .btn-ghost:hover { transform: translateY(-2px); background: #fff; }
+  .btn svg { width: 18px; height: 18px; }
+
+  /* Prévia do radar */
+  .preview { position: relative; display: block; aspect-ratio: 1 / 1; border-radius: 24px; overflow: hidden;
+             background: var(--card); border: 1px solid rgba(255,255,255,.95);
+             box-shadow: 0 30px 60px -30px rgba(30,40,90,.45); text-decoration: none; transition: transform .3s; }
+  .preview:hover { transform: translateY(-4px) rotate(-.4deg); }
+  .preview iframe { position: absolute; left: 50%; top: 50%; width: 1220px; height: 1240px; border: 0;
+                    transform: translate(-50%, -50%) scale(var(--s, .4)); pointer-events: none; }
+  .preview .tag { position: absolute; left: 16px; bottom: 16px; padding: 7px 12px; border-radius: 999px; font-size: 12.5px;
+                  font-weight: 600; color: #fff; background: hsla(225, 30%, 16%, .85); backdrop-filter: blur(6px); }
+
+  section { padding: 44px 0; }
+  h2 { font-family: 'Outfit', sans-serif; font-size: 30px; letter-spacing: -.01em; margin-bottom: 8px; }
+  .sub { color: var(--ink-soft); margin-bottom: 28px; max-width: 720px; }
+
+  /* 4 passos */
+  .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; counter-reset: step; }
+  .step { position: relative; padding: 22px 20px 20px; border-radius: 18px; background: var(--card);
+          border: 1px solid rgba(255,255,255,.95); box-shadow: 0 16px 32px -24px rgba(30,40,90,.4);
+          transition: transform .25s, box-shadow .25s; }
+  .step:hover { transform: translateY(-3px); box-shadow: 0 22px 40px -24px rgba(30,40,90,.5); }
+  .step::before { counter-increment: step; content: counter(step); display: grid; place-items: center;
+                  width: 34px; height: 34px; border-radius: 10px; margin-bottom: 14px; font-family: 'Outfit'; font-weight: 700;
+                  color: #fff; background: linear-gradient(135deg, var(--line), var(--line-deep)); }
+  .step h3 { font-size: 16px; margin-bottom: 6px; }
+  .step p { font-size: 14px; color: var(--ink-soft); }
+
+  /* Achados por quadrante */
+  .quads { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  .quad { padding: 22px 22px 18px; border-radius: 18px; background: var(--card); border: 1px solid rgba(255,255,255,.95);
+          border-top: 5px solid var(--edge); box-shadow: 0 16px 32px -24px rgba(30,40,90,.4); }
+  .quad h3 { font-family: 'Outfit'; font-size: 19px; display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+  .quad h3 i { width: 14px; height: 14px; border-radius: 3px; background: var(--bg); border: 2px solid var(--edge); }
+  .quad ul { list-style: none; display: grid; gap: 8px; }
+  .quad li { font-size: 14px; padding-left: 16px; position: relative; }
+  .quad li::before { content: ""; position: absolute; left: 0; top: .6em; width: 6px; height: 6px; border-radius: 50%; background: var(--edge); }
+  .q-man { --bg: var(--man-bg); --edge: var(--man-edge); }
+  .q-dor { --bg: var(--dor-bg); --edge: var(--dor-edge); }
+  .q-opo { --bg: var(--opo-bg); --edge: var(--opo-edge); }
+  .q-exp { --bg: var(--exp-bg); --edge: var(--exp-edge); }
+
+  /* Fontes */
+  .sources { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .group { padding: 20px; border-radius: 18px; background: var(--card); border: 1px solid rgba(255,255,255,.95); }
+  .group h3 { font-size: 13px; letter-spacing: .1em; text-transform: uppercase; color: var(--line-deep); margin-bottom: 12px; }
+  .group ol { list-style: none; display: grid; gap: 10px; }
+  .group li { font-size: 14px; }
+  .group li a { font-weight: 600; text-decoration: none; }
+  .group li a:hover { text-decoration: underline; }
+  .group li small { display: block; color: var(--ink-soft); font-size: 12.5px; }
+
+  footer { padding: 28px 0 48px; font-size: 13px; color: var(--ink-soft); border-top: 1px solid rgba(30,40,90,.1); margin-top: 20px; }
+
+  .reveal { opacity: 0; transform: translateY(14px); transition: opacity .6s ease, transform .6s ease; }
+  .reveal.in { opacity: 1; transform: none; }
+
+  @media (max-width: 920px) {
+    .hero { grid-template-columns: 1fr; padding-top: 48px; }
+    .steps { grid-template-columns: repeat(2, 1fr); }
+    .sources { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 600px) {
+    .steps, .quads { grid-template-columns: 1fr; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { opacity: 1; transform: none; transition: none; }
+    html { scroll-behavior: auto; }
+  }
+</style>
 </head>
 <body>
-  <p>Redirecionando para o radar... <a href="desk-research/radar.html">Clique aqui se não for redirecionado</a>.</p>
+
+<main class="wrap">
+  <header class="hero">
+    <div>
+      <h1>Desk research: <span>avaliação do pé diabético</span> no PEC</h1>
+      <p class="lead"><strong>Objetivo:</strong> levantar os requisitos de um formulário de avaliação do pé diabético com
+        classificação de risco no PEC e-SUS APS, que conte para a boa prática F do indicador C4.</p>
+      <div class="actions">
+        <a class="btn btn-primary" id="btn-abrir-radar" href="desk-research/radar.html">
+          Abrir o What's on your radar?
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <a class="btn btn-ghost" id="btn-ver-fontes" href="#fontes">Ver as fontes</a>
+      </div>
+    </div>
+    <a class="preview" id="previa-radar" href="desk-research/radar.html" aria-label="Abrir o radar em tela cheia">
+      <iframe src="desk-research/radar.html" title="Prévia do gráfico What's on your radar?" tabindex="-1" loading="lazy"></iframe>
+      <span class="tag">32 achados · 4 áreas · 3 níveis de relevância</span>
+    </a>
+  </header>
+
+  <section id="metodo" class="reveal">
+    <h2>Como a pesquisa foi feita</h2>
+    <p class="sub">Seguimos as quatro etapas da desk research descritas no livro da disciplina (Wazlawick et al., 2025, seção 5.5).</p>
+    <div class="steps">
+      <article class="step">
+        <h3>Definir o objetivo</h3>
+        <p>Requisitos de um formulário de avaliação do pé diabético, com classificação de risco, que pontue no C4.</p>
+      </article>
+      <article class="step">
+        <h3>Mapear as fontes</h3>
+        <p>15 documentos: normas do Ministério e da SES-DF, diretrizes clínicas, LGPD e os documentos do próprio projeto.</p>
+      </article>
+      <article class="step">
+        <h3>Realizar a pesquisa</h3>
+        <p>Leitura de cada fonte e extração do que delimita o produto: regras do C4, classificação de risco, testes e prazos de retorno.</p>
+      </article>
+      <article class="step">
+        <h3>Analisar os dados</h3>
+        <p>Os achados foram organizados no radar: quanto mais perto do centro, mais relevante para o objetivo.</p>
+      </article>
+    </div>
+  </section>
+
+  <section id="achados" class="reveal">
+    <h2>Principais achados</h2>
+    <p class="sub">Um resumo por área do radar. No radar, passe o mouse ou toque em uma nota para ver de onde ela veio.</p>
+    <div class="quads">
+      <article class="quad q-man">
+        <h3><i></i>Manuais e portarias</h3>
+        <ul>
+          <li>A boa prática F vale 15 dos 100 pontos do C4: 1 avaliação dos pés em 12 meses.</li>
+          <li>Só pontuam médicos, enfermeiros, farmacêuticos, fisioterapeutas e terapeutas ocupacionais (Quadro 07).</li>
+          <li>O PCDT 2026 e a SBD 2026 adotam a classificação de risco do IWGDF 2023.</li>
+        </ul>
+      </article>
+      <article class="quad q-dor">
+        <h3><i></i>Dores</h3>
+        <ul>
+          <li>O C4 conta o registro ou o código SIGTAP, não a qualidade do exame.</li>
+          <li>Hoje o exame vai para um campo de texto livre de 250 caracteres por perna.</li>
+          <li>MS 2016 e SES-DF usam categorias e prazos de retorno diferentes do IWGDF.</li>
+        </ul>
+      </article>
+      <article class="quad q-opo">
+        <h3><i></i>Oportunidades</h3>
+        <ul>
+          <li>Calcular o risco de 0 a 3 automaticamente, como no PCDT.</li>
+          <li>Aceitar o teste de toque (IpTT) onde não houver monofilamento.</li>
+          <li>Gerar o SIGTAP só quando a avaliação estiver completa.</li>
+        </ul>
+      </article>
+      <article class="quad q-exp">
+        <h3><i></i>Expectativas</h3>
+        <ul>
+          <li>Registro estruturado que pontue no C4.</li>
+          <li>Identificar os pacientes de alto risco para busca ativa.</li>
+          <li>Formulário rápido, clicável, no padrão do PEC.</li>
+        </ul>
+      </article>
+    </div>
+  </section>
+
+  <section id="fontes" class="reveal">
+    <h2>Fontes mapeadas</h2>
+    <p class="sub">Os PDFs estão neste repositório. Clique para abrir.</p>
+    <div class="sources">
+      <div class="group">
+        <h3>Normas e protocolos oficiais</h3>
+        <ol>
+          <li><a href="Nota%20Metodológica%20C4%20-%20Cuidado%20da%20pessoa%20com%20diabetes.pdf">Nota Metodológica C4</a><small>MS/SAPS, 2026 · boa prática F e Quadro 07</small></li>
+          <li><a href="PCDT%20DM2.pdf">PCDT Diabete Melito tipo 2</a><small>Portaria SCTIE/MS nº 13/2026</small></li>
+          <li><a href="Manual%20do%20Pé%20Diabético.pdf">Manual do Pé Diabético</a><small>Ministério da Saúde, 2016</small></li>
+          <li><a href="Caderno_AtencaoBasica36.pdf">Caderno de Atenção Básica nº 36</a><small>Ministério da Saúde, 2013</small></li>
+          <li><a href="Protocolo_Manejo_Pe_Diabetico.pdf">Protocolo de cuidado com os pés</a><small>SES-DF · Portaria nº 1.356/2018</small></li>
+          <li><a href="Fluxograma%20do%20Pé%20Diabético.pdf">Fluxograma do pé diabético</a><small>SES-DF · APS e atenção especializada</small></li>
+          <li><a href="https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2018/lei/l13709.htm" target="_blank" rel="noopener">LGPD</a><small>Lei nº 13.709/2018</small></li>
+        </ol>
+      </div>
+      <div class="group">
+        <h3>Diretrizes clínicas</h3>
+        <ol>
+          <li><a href="IWGDF-Guidelines-2023.pdf">IWGDF Guidelines 2023</a><small>International Working Group on the Diabetic Foot</small></li>
+          <li><a href="Diagnóstico%20e%20prevenção%20de%20úlceras%20no%20pé%20diabético.pdf">Diagnóstico e prevenção de úlceras no pé diabético</a><small>Diretriz SBD, 2026</small></li>
+          <li><a href="cartilha-digital-algoritmo_2026%20PÉ%20DM.pdf">Algoritmo do Pé em Diabetes</a><small>SBD, 2026</small></li>
+          <li><a href="Diretrizes-Sociedade-Brasileira-de-Diabetes-2019-20201.pdf">Diretrizes SBD 2019-2020</a><small>Sociedade Brasileira de Diabetes</small></li>
+          <li><a href="E-book-Consulta-de-Enfermagem_no-acompanhamento-de-pessoas-com-diabetes-mellitus-tipo-2-na-atencao-primaria-a-saude_SBD.pdf">Consulta de Enfermagem em DM2 na APS</a><small>E-book SBD</small></li>
+        </ol>
+      </div>
+      <div class="group">
+        <h3>Documentos do projeto</h3>
+        <ol>
+          <li><a href="Proposta_Formulario_Pe_Diabetico_PEC_eSUS_1.pdf">Proposta técnica do formulário</a><small>Out/2026</small></li>
+          <li><a href="Briefing%20-%20Alinhamento%20com%20o%20gerente.docx">Alinhamento com o gerente</a><small>Briefing · .docx</small></li>
+          <li><a href="Briefing%20–%20Alinhamento%20Cliente.docx">Briefing com o cliente</a><small>Briefing · .docx</small></li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    Método: Wazlawick et al., <em>Desenvolvimento de Software Centrado no Usuário</em> (UFSC, 2025), seção 5.5 (Desk Research) e Figura 5.2.
+  </footer>
+</main>
+
+<script>
+  // Ajusta a escala da prévia do radar ao tamanho do cartão
+  const preview = document.getElementById('previa-radar');
+  const fit = () => preview.style.setProperty('--s', Math.min(preview.clientWidth / 1220, preview.clientHeight / 1240));
+  new ResizeObserver(fit).observe(preview);
+
+  // Revela as seções ao rolar
+  const io = new IntersectionObserver(es => es.forEach(e => e.isIntersecting && (e.target.classList.add('in'), io.unobserve(e.target))), { threshold: .12 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
 </body>
 </html>

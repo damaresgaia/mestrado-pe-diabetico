@@ -66,8 +66,8 @@
     content: ""; position: absolute; right: 0; bottom: 0; width: 0; height: 0;
     border-style: solid; border-width: 0 0 12px 12px; border-color: transparent transparent var(--edge) transparent;
   }
-  .note:hover { transform: translate(-50%, -50%) rotate(0deg) scale(1.08); z-index: 20;
-                box-shadow: 0 18px 30px -14px rgba(20,30,70,.55); }
+  .note:hover, .note:focus-visible { transform: translate(-50%, -50%) rotate(0deg) scale(1.08); z-index: 20;
+                box-shadow: 0 18px 30px -14px rgba(20,30,70,.55); outline: none; }
   .note.missing { background: #fff !important; outline: 1.8px dashed var(--edge); outline-offset: -1.8px; }
   .note .tip {
     position: absolute; left: 50%; top: calc(100% + 8px); transform: translateX(-50%) translateY(-4px);
@@ -75,7 +75,7 @@
     font-size: 11.5px; font-weight: 400; line-height: 1.4; opacity: 0; pointer-events: none;
     transition: opacity .2s, transform .2s; z-index: 30;
   }
-  .note:hover .tip { opacity: 1; transform: translateX(-50%) translateY(0); }
+  .note:hover .tip, .note:focus-visible .tip, .note:focus .tip { opacity: 1; transform: translateX(-50%) translateY(0); }
   .man { background: var(--man-bg); --edge: var(--man-edge); }
   .dor { background: var(--dor-bg); --edge: var(--dor-edge); }
   .opo { background: var(--opo-bg); --edge: var(--opo-edge); }
@@ -140,21 +140,21 @@
   // q: quadrante (tl, tr, bl, br) · ring: 1 primário, 2 secundário, 3 terciário · slot: posição dentro do anel
   const items = [
     // MANUAIS / PORTARIAS
-    { q:'tl', c:'man', ring:1, slot:0, t:'Nota Metodológica C4: boa prática F (15 pts) e Quadro 07', s:'Ministério da Saúde (SAPS): define a Boa Prática F (15 pts) exigindo 1 avaliação dos pés em 12 meses no MIAI ou com SIGTAP 03.01.04.009-5. Habilita CBOs do Quadro 07: Médicos, Enfermeiros, Farmacêuticos, Fisioterapeutas e Terapeutas Ocupacionais.' },
+    { q:'tl', c:'man', ring:1, slot:0, t:'Nota Metodológica C4: boa prática F (15 pts) e Quadro 07', s:'MS/SAPS, 2026. Boa prática F (15 de 100 pts): 1 avaliação dos pés em 12 meses, registrada no Atendimento Individual (MIAI) ou pelo SIGTAP 03.01.04.009-5. Quadro 07: só médicos, enfermeiros, farmacêuticos, fisioterapeutas e terapeutas ocupacionais pontuam.' },
     { q:'tl', c:'man', ring:1, slot:1, t:'PCDT DM2: Portaria SCTIE/MS nº 13/2026', s:'Protocolo nacional. Usa a estratificação IWGDF (Material Suplementar E), pede avaliação ao diagnóstico e anual, e pelo menos 2 testes de sensibilidade (monofilamento + outro).' },
     { q:'tl', c:'man', ring:2, slot:0, t:'LGPD: Lei 13.709/2018, arts. 5º, 6º, 11 e 13', s:'Dado de saúde é dado sensível (art. 5º, II). Base legal: tutela da saúde (art. 11, II, f) e políticas públicas (art. 11, II, b). Princípio da necessidade (art. 6º). Estudos com dados pseudonimizados (art. 13).' },
     { q:'tl', c:'man', ring:2, slot:1, t:'Diretriz SBD 2026: prevenção de úlceras no pé', s:'Quadro 3 (risco 0 a 3, igual ao IWGDF) e recomendações R1 a R15. Aceita o teste de toque (IpTT) como alternativa ao monofilamento (R1).' },
-    { q:'tl', c:'man', ring:2, slot:2, t:'IWGDF 2023: guia prático', s:'Diretrizes Internacionais IWGDF 2023: estratificação de risco de 0 a 3 (0=muito baixo a 3=alto risco), intervalos de rastreamento de 1 a 12 meses, testes com monofilamento de 10g e recomendações de calçados terapêuticos.' },
+    { q:'tl', c:'man', ring:2, slot:2, t:'IWGDF 2023: guia prático', s:'Tabela 1: risco 0 (sem PSP nem DAP, anual), 1 (PSP ou DAP, 6–12 meses), 2 (PSP + DAP ou deformidade, 3–6 meses), 3 (+ úlcera/amputação prévia ou DRT, 1–3 meses). Aceita o Ipswich Touch Test. É a base do PCDT 2026 e da SBD 2026.' },
     { q:'tl', c:'man', ring:3, slot:0, t:'Algoritmo do Pé em Diabetes (SBD 2026)', s:'Passo a passo da avaliação (sensibilidade, deformidades, vascular, pele, histórico), autocuidado, lesões pré-ulcerativas e calçados por risco.' },
-    { q:'tl', c:'man', ring:3, slot:1, t:'Manual do Pé Diabético (MS 2016) e CAB 36', s:'Ministério da Saúde: 4 graus de risco (0 a 3), periodicidade de reavaliação anual a bimestral, testes com monofilamento de 10g e diapasão 128 Hz, além de fluxos de cuidado e regulação na APS.' },
-    { q:'tl', c:'man', ring:3, slot:2, t:'Fluxograma pé diabético SES-DF', s:'Portaria SES-DF nº 1.356/2018: protocolo da APS e ambulatório. Ficha de rastreamento (Anexo 1), estratificação de risco 0 a 3, sinais de alerta de isquemia crítica e fluxo para órteses/próteses (NUPOP/NAOPME).' },
+    { q:'tl', c:'man', ring:3, slot:1, t:'Manual do Pé Diabético (MS 2016) e CAB 36', s:'Quadros 2.1 e 3.1 (Boulton, 2008): risco 0 anual, 1 a cada 3–6 meses, 2 a cada 2–3 meses, 3 a cada 1–2 meses. Monofilamento 10 g e diapasão 128 Hz. Cita o registro do exame no PEC em SOAP e na ficha de procedimentos.' },
+    { q:'tl', c:'man', ring:3, slot:2, t:'Protocolo e fluxograma SES-DF (Portaria 1.356/2018)', s:'Mesma classificação do MS 2016. Ficha de rastreamento (Anexo 1), sinais de isquemia crítica e infecção grave que mandam para a emergência, e encaminhamento de órteses (Anexos 3 e 4). É a base das regras da Proposta técnica.' },
 
     // DORES
-    { q:'tr', c:'dor', ring:1, slot:0, t:'C4 conta o código, não a qualidade do exame', s:'Proposta técnica, seção 2, e Briefing do cliente: hoje basta lançar o SIGTAP 03.01.04.009-5.' },
+    { q:'tr', c:'dor', ring:1, slot:0, t:'C4 conta o código, não a qualidade do exame', s:'Nota C4, Quadro 07: basta um registro de avaliação dos pés ou o SIGTAP 03.01.04.009-5. A própria Nota (item 33) admite que o resultado depende de registro qualificado em campo específico. Proposta técnica, seção 2.' },
     { q:'tr', c:'dor', ring:1, slot:1, t:'Risco não fica registrado, e o alto risco não é identificado', s:'Briefing do gerente: a classificação fica no papel ou na memória do profissional, e a equipe não consegue fazer busca ativa.' },
     { q:'tr', c:'dor', ring:2, slot:0, t:'Exame em papel ou em texto livre (250 caracteres)', s:'Proposta técnica, seção 1: "Membros inferiores" é um campo livre de 250 caracteres por perna.' },
     { q:'tr', c:'dor', ring:2, slot:1, t:'Retorno depende da memória do profissional', s:'Proposta técnica, "Como é hoje × como ficaria".' },
-    { q:'tr', c:'dor', ring:2, slot:2, t:'Protocolos divergentes: SES-DF × IWGDF/PCDT', s:'A Proposta classifica pelo modelo da SES-DF; o PCDT 2026 e a SBD 2026 usam o IWGDF. As categorias e os prazos de retorno são diferentes.' },
+    { q:'tr', c:'dor', ring:2, slot:2, t:'Protocolos divergentes: MS/SES-DF × IWGDF/PCDT', s:'MS 2016 e SES-DF: risco 1 = neuropatia, retorno em 3–6 meses. IWGDF 2023, PCDT 2026 e SBD 2026: risco 1 = PSP ou DAP, retorno em 6–12 meses, e a DRT entra no risco 3. A Proposta mistura os dois modelos.' },
     { q:'tr', c:'dor', ring:3, slot:0, t:'UBS sem monofilamento ou diapasão', s:'Restrição citada no Briefing do gerente; Proposta técnica, seção 7.' },
     { q:'tr', c:'dor', ring:3, slot:1, t:'Úlcera volta: 40% em 1 ano, 65% em 3 anos', s:'Diretriz SBD 2026 (introdução) e PCDT DM2 2026.' },
     { q:'tr', c:'dor', ring:3, slot:2, t:'40% a 70% das amputações não traumáticas', s:'PCDT DM2 2026: complicações do pé diabético respondem por 40% a 70% das amputações não traumáticas de membros inferiores.' },
@@ -198,6 +198,7 @@
     const el = document.createElement('div');
     el.className = `note ${it.c}${it.missing ? ' missing' : ''}`;
     el.id = `nota-${it.q}-${it.ring}-${it.slot}`;
+    el.tabIndex = 0; // permite abrir a fonte com toque ou teclado
     el.style.left = `${x / 10}%`;
     el.style.top = `${y / 10}%`;
     el.style.setProperty('--rot', `${((i * 37) % 5 - 2) * 0.6}deg`);
