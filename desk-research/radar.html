@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>What's on your radar? · Desk research · Avaliação do pé diabético no PEC</title>
+<meta name="description" content="Desk research do grupo (Analista de Requisitos e Normas): gráfico What's on your radar? sobre o formulário de avaliação do pé diabético com classificação de risco no PEC e-SUS APS.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-1: hsl(225, 40%, 97%);
+    --bg-2: hsl(220, 35%, 92%);
+    --ink: hsl(225, 30%, 18%);
+    --ink-soft: hsl(225, 15%, 42%);
+    --line: hsl(222, 70%, 56%);
+    --line-soft: hsla(222, 70%, 56%, .35);
+
+    --man-bg: hsl(36, 95%, 86%);   --man-edge: hsl(36, 85%, 52%);
+    --dor-bg: hsl(130, 45%, 86%);  --dor-edge: hsl(130, 45%, 42%);
+    --opo-bg: hsl(275, 60%, 91%);  --opo-edge: hsl(275, 45%, 58%);
+    --exp-bg: hsl(335, 85%, 92%);  --exp-edge: hsl(335, 70%, 58%);
+
+    --radar: 1000px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    color: var(--ink);
+    background: radial-gradient(1200px 800px at 15% 0%, #fff 0%, transparent 60%),
+                linear-gradient(160deg, var(--bg-1), var(--bg-2));
+    min-height: 100vh;
+    display: flex; flex-direction: column; align-items: center;
+    padding: 36px 24px 48px;
+  }
+  header { width: min(1180px, 100%); display: flex; justify-content: space-between; align-items: flex-end; gap: 32px; margin-bottom: 8px; }
+  h1 { font-family: 'Outfit', sans-serif; font-size: 40px; line-height: 1.05; margin: 0 0 8px; letter-spacing: -.01em; }
+  .objective { font-size: 15px; color: var(--ink-soft); max-width: 640px; line-height: 1.5; }
+  .objective strong { color: var(--ink); font-weight: 600; }
+  .legend { display: inline-flex; align-items: center; font-size: 13px; font-weight: 500; color: var(--ink-soft);
+            background: rgba(255,255,255,.75); backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,.9);
+            border-radius: 10px; padding: 10px 18px; box-shadow: 0 10px 30px -18px rgba(30,40,90,.35);
+            white-space: nowrap; }
+
+  .stage { position: relative; width: calc(var(--radar) + 220px); height: calc(var(--radar) + 60px); margin-top: 8px; }
+  .radar { position: absolute; left: 110px; top: 30px; width: var(--radar); height: var(--radar); }
+  svg { position: absolute; inset: 0; overflow: visible; }
+
+  .quad-label { position: absolute; font-family: 'Outfit', sans-serif; font-weight: 600; font-size: 20px; color: var(--line); }
+  .quad-label small { display: block; font-family: 'Inter'; font-weight: 500; font-size: 11.5px; color: var(--ink-soft); margin-top: 2px; }
+  .ql-tl { left: 0; top: 40px; }
+  .ql-tr { right: 0; top: 40px; text-align: right; }
+  .ql-bl { left: 0; bottom: 20px; }
+  .ql-br { right: 0; bottom: 20px; text-align: right; }
+
+  .note {
+    position: absolute; width: 132px; min-height: 48px;
+    padding: 8px 10px 9px; font-size: 11.6px; line-height: 1.28; font-weight: 600;
+    border-radius: 3px; transform: translate(-50%, -50%) rotate(var(--rot, 0deg));
+    box-shadow: 0 1px 0 rgba(0,0,0,.04), 0 8px 16px -10px rgba(20,30,70,.45);
+    transition: transform .25s cubic-bezier(.2,.8,.2,1), box-shadow .25s; cursor: default;
+    opacity: 0; animation: pop .5s cubic-bezier(.2,.8,.2,1) forwards; animation-delay: var(--delay, 0s);
+  }
+  .note::after { /* canto dobrado, como no livro */
+    content: ""; position: absolute; right: 0; bottom: 0; width: 0; height: 0;
+    border-style: solid; border-width: 0 0 12px 12px; border-color: transparent transparent var(--edge) transparent;
+  }
+  .note:hover { transform: translate(-50%, -50%) rotate(0deg) scale(1.08); z-index: 20;
+                box-shadow: 0 18px 30px -14px rgba(20,30,70,.55); }
+  .note.missing { background: #fff !important; outline: 1.8px dashed var(--edge); outline-offset: -1.8px; }
+  .note .tip {
+    position: absolute; left: 50%; top: calc(100% + 8px); transform: translateX(-50%) translateY(-4px);
+    width: 240px; padding: 9px 11px; border-radius: 10px; background: hsl(225, 30%, 16%); color: #fff;
+    font-size: 11.5px; font-weight: 400; line-height: 1.4; opacity: 0; pointer-events: none;
+    transition: opacity .2s, transform .2s; z-index: 30;
+  }
+  .note:hover .tip { opacity: 1; transform: translateX(-50%) translateY(0); }
+  .man { background: var(--man-bg); --edge: var(--man-edge); }
+  .dor { background: var(--dor-bg); --edge: var(--dor-edge); }
+  .opo { background: var(--opo-bg); --edge: var(--opo-edge); }
+  .exp { background: var(--exp-bg); --edge: var(--exp-edge); }
+
+  @keyframes pop { from { opacity: 0; transform: translate(-50%, -40%) rotate(var(--rot, 0deg)) scale(.9); }
+                   to   { opacity: 1; transform: translate(-50%, -50%) rotate(var(--rot, 0deg)) scale(1); } }
+
+
+
+  @media print {
+    body { background: #fff; padding: 0; }
+    .note { animation: none; opacity: 1; }
+    .note .tip { display: none; }
+    .legend { box-shadow: none; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div>
+    <h1>What's on your radar?</h1>
+    <p class="objective"><strong>Objetivo:</strong> levantar os requisitos de um formulário de avaliação do pé diabético com
+      classificação de risco no PEC e-SUS APS, que conte para a boa prática F do indicador C4.</p>
+  </div>
+  <div class="legend" aria-label="Legenda">
+    Mais perto do centro = mais relevante para o objetivo
+  </div>
+</header>
+
+<main class="stage" id="stage">
+  <div class="quad-label ql-tl">Manuais/portarias<small>normas e protocolos</small></div>
+  <div class="quad-label ql-tr">Dores<small>problemas de hoje</small></div>
+  <div class="quad-label ql-bl">Oportunidades<small>o que a solução pode fazer</small></div>
+  <div class="quad-label ql-br">Expectativas<small>o que cliente e usuários esperam</small></div>
+
+  <div class="radar" id="radar">
+    <svg viewBox="0 0 1000 1000" aria-hidden="true">
+      <defs>
+        <radialGradient id="g" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="hsl(222,90%,97%)"/>
+          <stop offset="100%" stop-color="hsl(222,60%,99%)" stop-opacity=".2"/>
+        </radialGradient>
+      </defs>
+      <circle cx="500" cy="500" r="490" fill="url(#g)" stroke="var(--line)" stroke-width="1.4"/>
+      <circle cx="500" cy="500" r="340" fill="none" stroke="var(--line)" stroke-width="1.2"/>
+      <circle cx="500" cy="500" r="180" fill="none" stroke="var(--line)" stroke-width="1.2"/>
+      <line x1="500" y1="0" x2="500" y2="1000" stroke="var(--line-soft)" stroke-width="1.4"/>
+      <line x1="0" y1="500" x2="1000" y2="500" stroke="var(--line-soft)" stroke-width="1.4"/>
+      <g font-family="Inter" font-size="10" font-weight="600" fill="var(--line)" letter-spacing="1.5" text-anchor="middle">
+        <text x="590" y="514">PRIMÁRIO</text>
+        <text x="760" y="514">SECUNDÁRIO</text>
+        <text x="915" y="514">TERCIÁRIO</text>
+      </g>
+    </svg>
+  </div>
+</main>
+
+
+<script>
+  // q: quadrante (tl, tr, bl, br) · ring: 1 primário, 2 secundário, 3 terciário · slot: posição dentro do anel
+  const items = [
+    // MANUAIS / PORTARIAS
+    { q:'tl', c:'man', ring:1, slot:0, t:'Nota Metodológica C4: boa prática F (15 pts) e Quadro 07', s:'Ministério da Saúde (SAPS): define a Boa Prática F (15 pts) exigindo 1 avaliação dos pés em 12 meses no MIAI ou com SIGTAP 03.01.04.009-5. Habilita CBOs do Quadro 07: Médicos, Enfermeiros, Farmacêuticos, Fisioterapeutas e Terapeutas Ocupacionais.' },
+    { q:'tl', c:'man', ring:1, slot:1, t:'PCDT DM2: Portaria SCTIE/MS nº 13/2026', s:'Protocolo nacional. Usa a estratificação IWGDF (Material Suplementar E), pede avaliação ao diagnóstico e anual, e pelo menos 2 testes de sensibilidade (monofilamento + outro).' },
+    { q:'tl', c:'man', ring:2, slot:0, t:'LGPD: Lei 13.709/2018, arts. 5º, 6º, 11 e 13', s:'Dado de saúde é dado sensível (art. 5º, II). Base legal: tutela da saúde (art. 11, II, f) e políticas públicas (art. 11, II, b). Princípio da necessidade (art. 6º). Estudos com dados pseudonimizados (art. 13).' },
+    { q:'tl', c:'man', ring:2, slot:1, t:'Diretriz SBD 2026: prevenção de úlceras no pé', s:'Quadro 3 (risco 0 a 3, igual ao IWGDF) e recomendações R1 a R15. Aceita o teste de toque (IpTT) como alternativa ao monofilamento (R1).' },
+    { q:'tl', c:'man', ring:2, slot:2, t:'IWGDF 2023: guia prático', s:'Diretrizes Internacionais IWGDF 2023: estratificação de risco de 0 a 3 (0=muito baixo a 3=alto risco), intervalos de rastreamento de 1 a 12 meses, testes com monofilamento de 10g e recomendações de calçados terapêuticos.' },
+    { q:'tl', c:'man', ring:3, slot:0, t:'Algoritmo do Pé em Diabetes (SBD 2026)', s:'Passo a passo da avaliação (sensibilidade, deformidades, vascular, pele, histórico), autocuidado, lesões pré-ulcerativas e calçados por risco.' },
+    { q:'tl', c:'man', ring:3, slot:1, t:'Manual do Pé Diabético (MS 2016) e CAB 36', s:'Ministério da Saúde: 4 graus de risco (0 a 3), periodicidade de reavaliação anual a bimestral, testes com monofilamento de 10g e diapasão 128 Hz, além de fluxos de cuidado e regulação na APS.' },
+    { q:'tl', c:'man', ring:3, slot:2, t:'Fluxograma pé diabético SES-DF', s:'Portaria SES-DF nº 1.356/2018: protocolo da APS e ambulatório. Ficha de rastreamento (Anexo 1), estratificação de risco 0 a 3, sinais de alerta de isquemia crítica e fluxo para órteses/próteses (NUPOP/NAOPME).' },
+
+    // DORES
+    { q:'tr', c:'dor', ring:1, slot:0, t:'C4 conta o código, não a qualidade do exame', s:'Proposta técnica, seção 2, e Briefing do cliente: hoje basta lançar o SIGTAP 03.01.04.009-5.' },
+    { q:'tr', c:'dor', ring:1, slot:1, t:'Risco não fica registrado, e o alto risco não é identificado', s:'Briefing do gerente: a classificação fica no papel ou na memória do profissional, e a equipe não consegue fazer busca ativa.' },
+    { q:'tr', c:'dor', ring:2, slot:0, t:'Exame em papel ou em texto livre (250 caracteres)', s:'Proposta técnica, seção 1: "Membros inferiores" é um campo livre de 250 caracteres por perna.' },
+    { q:'tr', c:'dor', ring:2, slot:1, t:'Retorno depende da memória do profissional', s:'Proposta técnica, "Como é hoje × como ficaria".' },
+    { q:'tr', c:'dor', ring:2, slot:2, t:'Protocolos divergentes: SES-DF × IWGDF/PCDT', s:'A Proposta classifica pelo modelo da SES-DF; o PCDT 2026 e a SBD 2026 usam o IWGDF. As categorias e os prazos de retorno são diferentes.' },
+    { q:'tr', c:'dor', ring:3, slot:0, t:'UBS sem monofilamento ou diapasão', s:'Restrição citada no Briefing do gerente; Proposta técnica, seção 7.' },
+    { q:'tr', c:'dor', ring:3, slot:1, t:'Úlcera volta: 40% em 1 ano, 65% em 3 anos', s:'Diretriz SBD 2026 (introdução) e PCDT DM2 2026.' },
+    { q:'tr', c:'dor', ring:3, slot:2, t:'40% a 70% das amputações não traumáticas', s:'PCDT DM2 2026: complicações do pé diabético respondem por 40% a 70% das amputações não traumáticas de membros inferiores.' },
+
+    // OPORTUNIDADES
+    { q:'bl', c:'opo', ring:1, slot:0, t:'Classificação automática pelo IWGDF, como no PCDT', s:'Calcular o risco de 0 a 3 com PSP, DAP, deformidade, úlcera/amputação prévia e DRT, com retorno sugerido para cada risco.' },
+    { q:'bl', c:'opo', ring:1, slot:1, t:'Gerar o SIGTAP ao concluir com os campos mínimos', s:'Proposta técnica, seção 9: o procedimento só é gerado quando a avaliação está completa, e o C4 passa a refletir qualidade.' },
+    { q:'bl', c:'opo', ring:2, slot:0, t:'Teste de toque (IpTT) validado para UBS sem instrumento', s:'SBD 2026, R1: IpTT com sensibilidade de 77% e especificidade de 90%, concordância k=0,88 com o monofilamento. A cartilha da SBD também o indica na falta de instrumentos.' },
+    { q:'bl', c:'opo', ring:2, slot:1, t:'Puxar do prontuário: úlcera, amputação, DRT, HbA1c', s:'A DRT (doença renal em estágio terminal) é critério de risco 3 no IWGDF/PCDT e não aparece na Proposta.' },
+    { q:'bl', c:'opo', ring:2, slot:2, t:'Alertas de urgência: isquemia, infecção e Charcot', s:'PCDT 2026: úlcera infectada, isquemia crítica, gangrena e suspeita de Charcot agudo vão para a urgência. Cartilha SBD: diferença ≥2 °C, edema e rubor sugerem Charcot.' },
+    { q:'bl', c:'opo', ring:3, slot:0, t:'Lembrete de retorno por risco na agenda', s:'Proposta técnica, seção 9. Prazos do IWGDF: 12, 6–12, 3–6 e 1–3 meses.' },
+    { q:'bl', c:'opo', ring:3, slot:1, t:'Relatório para calçado ou órtese pelo SUS (risco 1 a 3)', s:'SBD 2026, Nota Importante 3: o SUS oferece calçados terapêuticos e palmilhas mediante relatório do profissional.' },
+    { q:'bl', c:'opo', ring:3, slot:2, t:'Painel de risco por equipe e UBS', s:'Proposta técnica, seção 11: distribuição de risco, PSP, DAP, úlceras e retornos.' },
+
+    // EXPECTATIVAS
+    { q:'br', c:'exp', ring:1, slot:0, t:'Registro estruturado que pontue no C4', s:'Briefing do cliente: prioridade 1.' },
+    { q:'br', c:'exp', ring:1, slot:1, t:'Identificar os pacientes de alto risco', s:'Briefing do cliente: prioridade 2.' },
+    { q:'br', c:'exp', ring:2, slot:0, t:'Exame padronizado entre profissionais e UBS', s:'Briefing do cliente: prioridade 3.' },
+    { q:'br', c:'exp', ring:2, slot:1, t:'Formulário rápido, clicável, no padrão do PEC', s:'Briefing do cliente (padrão de interface: PEC e formulário de hanseníase); Proposta técnica, princípios de desenho.' },
+    { q:'br', c:'exp', ring:2, slot:2, t:'Só os CBOs do Quadro 07 concluem a avaliação', s:'Briefing do cliente: médicos, enfermeiros, farmacêuticos, fisioterapeutas e terapeutas ocupacionais. Técnicos de enfermagem apenas apoiam.' },
+    { q:'br', c:'exp', ring:3, slot:0, t:'Gestão vê só dados agregados (LGPD)', s:'Briefing do cliente: o detalhe fica com quem atende o paciente. LGPD, princípios de finalidade e necessidade.' },
+    { q:'br', c:'exp', ring:3, slot:1, t:'Orientações de autocuidado para o paciente', s:'SBD 2026 (R3, R4) e cartilha SBD: higiene, pele, unhas, calçados, autoexame.' },
+    { q:'br', c:'exp', ring:3, slot:2, t:'Menos úlceras e amputações a longo prazo', s:'Briefing do cliente: impacto esperado a longo prazo.' },
+  ];
+
+  // Posições polares por anel/slot (r em px do centro; ângulo em graus a partir do eixo horizontal)
+  const layout = {
+    1: [ { r: 108, a: 31 }, { r: 138, a: 56 } ],
+    2: [ { r: 262, a: 15 }, { r: 258, a: 45 }, { r: 262, a: 72 } ],
+    3: [ { r: 420, a: 11 }, { r: 416, a: 45 }, { r: 420, a: 79 } ],
+  };
+  const sign = { tl: [-1, -1], tr: [1, -1], bl: [-1, 1], br: [1, 1] };
+
+  const radar = document.getElementById('radar');
+  items.forEach((it, i) => {
+    const p = layout[it.ring][it.slot];
+    const [sx, sy] = sign[it.q];
+    const rad = p.a * Math.PI / 180;
+    const x = 500 + sx * p.r * Math.cos(rad);
+    const y = 500 + sy * p.r * Math.sin(rad);
+    const el = document.createElement('div');
+    el.className = `note ${it.c}${it.missing ? ' missing' : ''}`;
+    el.id = `nota-${it.q}-${it.ring}-${it.slot}`;
+    el.style.left = `${x / 10}%`;
+    el.style.top = `${y / 10}%`;
+    el.style.setProperty('--rot', `${((i * 37) % 5 - 2) * 0.6}deg`);
+    el.style.setProperty('--delay', `${0.04 * i}s`);
+    el.innerHTML = `${it.t}<span class="tip">${it.s}</span>`;
+    radar.appendChild(el);
+  });
+</script>
+</body>
+</html>
