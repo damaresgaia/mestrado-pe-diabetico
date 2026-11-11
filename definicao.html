@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Etapa de Definição · MoSCoW & CSD 3 · Avaliação do Pé Diabético no PEC</title>
+<meta name="description" content="Guia de apoio da reunião de definição: proposta MoSCoW (MVP), levantamento de dados clínicos e evolução para a Matriz CSD 3ª versão.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-1: hsl(225, 40%, 97%);
+    --bg-2: hsl(220, 35%, 92%);
+    --ink: hsl(225, 30%, 18%);
+    --ink-soft: hsl(225, 15%, 42%);
+    --line: hsl(222, 70%, 56%);
+    --line-deep: hsl(224, 64%, 44%);
+    --card: rgba(255, 255, 255, 0.85);
+
+    --must: #10b981;
+    --must-bg: #ecfdf5;
+    --must-border: #a7f3d0;
+
+    --should: #0284c7;
+    --should-bg: #f0f9ff;
+    --should-border: #bae6fd;
+
+    --could: #d97706;
+    --could-bg: #fffbeb;
+    --could-border: #fde68a;
+
+    --wont: #64748b;
+    --wont-bg: #f8fafc;
+    --wont-border: #e2e8f0;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    color: var(--ink);
+    line-height: 1.55;
+    background: radial-gradient(1200px 800px at 10% -10%, #fff 0%, transparent 60%),
+                radial-gradient(900px 600px at 100% 0%, hsla(222, 90%, 85%, .35) 0%, transparent 60%),
+                linear-gradient(160deg, var(--bg-1), var(--bg-2));
+    min-height: 100vh;
+    padding: 36px 20px 60px;
+  }
+  .wrap { width: min(1040px, 100%); margin: 0 auto; }
+
+  /* Header */
+  .top-nav { margin-bottom: 24px; display: flex; align-items: center; justify-content: space-between; }
+  .btn-back {
+    display: inline-flex; align-items: center; gap: 8px; text-decoration: none;
+    font-size: 14px; font-weight: 600; color: var(--line-deep);
+    padding: 8px 14px; background: rgba(255,255,255,0.7); border-radius: 8px;
+    border: 1px solid rgba(255,255,255,0.9); transition: all .2s;
+  }
+  .btn-back:hover { background: #fff; transform: translateX(-2px); }
+
+  header { margin-bottom: 36px; }
+  .badge {
+    display: inline-block; padding: 4px 12px; border-radius: 999px;
+    font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .05em;
+    background: hsla(222, 70%, 56%, .12); color: var(--line-deep); margin-bottom: 12px;
+  }
+  h1 { font-family: 'Outfit', sans-serif; font-size: clamp(30px, 4vw, 42px); line-height: 1.1; letter-spacing: -.01em; }
+  h1 span { background: linear-gradient(90deg, var(--line-deep), hsl(275, 55%, 55%)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .lead { margin-top: 10px; font-size: 16px; color: var(--ink-soft); max-width: 800px; }
+
+  /* Sections */
+  section { margin-bottom: 40px; }
+  h2 { font-family: 'Outfit', sans-serif; font-size: 24px; margin-bottom: 16px; display: flex; align-items: center; gap: 10px; }
+  h2 span.num {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 28px; height: 28px; border-radius: 8px; font-size: 14px;
+    background: var(--line); color: #fff; font-family: 'Inter'; font-weight: 700;
+  }
+
+  /* Callout professor */
+  .alert-prof {
+    background: #eff6ff; border: 1.5px solid #bfdbfe; border-left: 5px solid #3b82f6;
+    border-radius: 12px; padding: 16px 20px; margin-bottom: 24px; font-size: 14.5px;
+  }
+  .alert-prof strong { color: #1e40af; }
+
+  /* Grid MoSCoW */
+  .moscow-grid { display: grid; grid-template-columns: 1fr; gap: 18px; }
+  @media(min-width: 768px) {
+    .moscow-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  .card-moscow {
+    background: var(--card); border-radius: 16px; padding: 22px;
+    border: 1px solid rgba(255,255,255,.9); box-shadow: 0 12px 28px -18px rgba(30,40,90,.25);
+    position: relative; overflow: hidden;
+  }
+  .card-moscow::before {
+    content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 6px;
+  }
+  .card-moscow.must::before { background: var(--must); }
+  .card-moscow.should::before { background: var(--should); }
+  .card-moscow.could::before { background: var(--could); }
+  .card-moscow.wont::before { background: var(--wont); }
+
+  .header-card { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 14px; }
+  .header-card h3 { font-family: 'Outfit', sans-serif; font-size: 19px; }
+  .header-card .tag-mvp {
+    font-size: 11.5px; font-weight: 700; text-transform: uppercase; padding: 3px 8px; border-radius: 6px;
+  }
+  .must .tag-mvp { background: var(--must-bg); color: var(--must); border: 1px solid var(--must-border); }
+  .should .tag-mvp { background: var(--should-bg); color: var(--should); border: 1px solid var(--should-border); }
+  .could .tag-mvp { background: var(--could-bg); color: var(--could); border: 1px solid var(--could-border); }
+  .wont .tag-mvp { background: var(--wont-bg); color: var(--wont); border: 1px solid var(--wont-border); }
+
+  .card-moscow ul { list-style: none; display: grid; gap: 12px; }
+  .card-moscow li { font-size: 13.8px; padding-left: 20px; position: relative; }
+  .card-moscow li::before {
+    content: "•"; position: absolute; left: 4px; font-size: 18px; line-height: 1; top: 1px;
+  }
+  .must li::before { color: var(--must); }
+  .should li::before { color: var(--should); }
+  .could li::before { color: var(--could); }
+  .wont li::before { color: var(--wont); }
+
+  .card-moscow li strong { color: var(--ink); display: block; margin-bottom: 2px; }
+  .card-moscow li span { color: var(--ink-soft); font-size: 13px; }
+
+  /* Tabela de Dados e Regras */
+  .table-box {
+    background: var(--card); border-radius: 16px; overflow: hidden;
+    border: 1px solid rgba(255,255,255,.9); box-shadow: 0 12px 28px -18px rgba(30,40,90,.25);
+    margin-top: 14px;
+  }
+  table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+  th { background: rgba(30,40,90,.05); text-align: left; padding: 12px 16px; font-weight: 600; color: var(--ink); border-bottom: 1px solid rgba(30,40,90,.08); }
+  td { padding: 12px 16px; border-bottom: 1px solid rgba(30,40,90,.05); vertical-align: top; }
+  tr:last-child td { border-bottom: none; }
+  .chip { display: inline-block; padding: 2px 7px; border-radius: 4px; font-size: 11.5px; font-weight: 600; background: #e0e7ff; color: #3730a3; }
+
+  /* Perguntas Rápidas */
+  .qa-grid { display: grid; gap: 12px; }
+  .qa-item {
+    background: var(--card); border-radius: 12px; padding: 16px 20px;
+    border: 1px solid rgba(255,255,255,.9);
+  }
+  .qa-q { font-weight: 600; font-size: 14.5px; color: var(--line-deep); margin-bottom: 4px; }
+  .qa-a { font-size: 13.5px; color: var(--ink); }
+
+  footer {
+    margin-top: 48px; padding-top: 24px; border-top: 1px solid rgba(30,40,90,.1);
+    font-size: 13px; color: var(--ink-soft); text-align: center;
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <nav class="top-nav">
+    <a href="index.html" class="btn-back">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      Voltar para o Desk Research
+    </a>
+    <span style="font-size: 13px; font-weight: 600; color: var(--ink-soft);">Etapa de Definição · Grupo Pé Diabético</span>
+  </nav>
+
+  <header>
+    <div class="badge">Reunião de Alinhamento & Decisão</div>
+    <h1>Planejamento da Definição: <span>MoSCoW & MVP</span></h1>
+    <p class="lead">Priorização do MVP (2 a 3 funcionalidades), regras de validação normativa (Nota C4, IWGDF 2023, LGPD) e evolução para a Matriz CSD 3ª versão.</p>
+  </header>
+
+  <div class="alert-prof">
+    <strong>Orientação do Professor:</strong> Focar em <strong>2 a 3 funcionalidades essenciais no MVP</strong> para garantir um protótipo com profundidade, viabilidade técnica de entrega e rigor metodológico.
+  </div>
+
+  <!-- SEÇÃO 1: MOSCOW -->
+  <section id="moscow">
+    <h2><span class="num">1</span> Matriz MoSCoW (Proposta para o Grupo)</h2>
+    <div class="moscow-grid">
+      
+      <!-- MUST -->
+      <article class="card-moscow must">
+        <div class="header-card">
+          <h3>Must have</h3>
+          <span class="tag-mvp">O MVP (Núcleo)</span>
+        </div>
+        <ul>
+          <li>
+            <strong>1. Formulário de Exame Físico Estruturado e Rápido</strong>
+            <span>Substitui o campo de 250 caracteres por opções clicáveis nos 3 eixos (pele, vascular e sensibilidade). Aceita tanto Monofilamento 10g quanto o <strong>Teste de Toque (IpTT)</strong> para UBSs sem instrumentos.</span>
+          </li>
+          <li>
+            <strong>2. Classificação Automática de Risco (IWGDF 2023)</strong>
+            <span>Calcula o risco de 0 a 3 na hora com base no pior pé, sugerindo o prazo de retorno clínico oficial (12 meses, 6-12m, 3-6m ou 1-3m) conforme o PCDT DM2 2026.</span>
+          </li>
+          <li>
+            <strong>3. Disparo Automático do Procedimento SIGTAP (C4)</strong>
+            <span>Lança automaticamente o procedimento <code>03.01.04.009-5</code> ao concluir com os campos mínimos preenchidos por profissional do Quadro 07 (médico, enfermeiro, etc.), garantindo os 15 pontos da Boa Prática F.</span>
+          </li>
+        </ul>
+      </article>
+
+      <!-- SHOULD -->
+      <article class="card-moscow should">
+        <div class="header-card">
+          <h3>Should have</h3>
+          <span class="tag-mvp">Versão 2</span>
+        </div>
+        <ul>
+          <li>
+            <strong>Alertas Visuais de Urgência Imediata</strong>
+            <span>Notificação em vermelho de conduta urgente para casos de suspeita de Pé de Charcot, isquemia crítica ou infecção grave/úlcera ativa.</span>
+          </li>
+          <li>
+            <strong>Aproveitamento de Dados Pré-Existentes do PEC</strong>
+            <span>Importação automática de histórico prévio (amputação, ferida anterior ou última HbA1c) para não re-digitar dados que o sistema já tem.</span>
+          </li>
+        </ul>
+      </article>
+
+      <!-- COULD -->
+      <article class="card-moscow could">
+        <div class="header-card">
+          <h3>Could have</h3>
+          <span class="tag-mvp">Desejável</span>
+        </div>
+        <ul>
+          <li>
+            <strong>Agendamento Direto na Agenda do PEC</strong>
+            <span>Inserir o paciente na fila de agendamento automático de retorno de acordo com o intervalo do risco calculado.</span>
+          </li>
+          <li>
+            <strong>Relatório de Prescrição de Calçado / Órtese</strong>
+            <span>Geração do laudo padronizado do SUS para solicitação de sapatos protetores ou palmilhas (risco 2 e 3).</span>
+          </li>
+          <li>
+            <strong>Guia de Autocuidado para Impressão</strong>
+            <span>Orientações personalizadas de higiene, corte de unhas e inspeção diária para entregar ao paciente.</span>
+          </li>
+        </ul>
+      </article>
+
+      <!-- WONT -->
+      <article class="card-moscow wont">
+        <div class="header-card">
+          <h3>Won't have</h3>
+          <span class="tag-mvp">Fora do Escopo</span>
+        </div>
+        <ul>
+          <li>
+            <strong>Diagnóstico por Imagem / IA por Foto</strong>
+            <span>Requer infraestrutura de visão computacional fora da realidade atual da rede básica.</span>
+          </li>
+          <li>
+            <strong>Aplicativo Móvel Separado para Paciente</strong>
+            <span>Foco é na rotina da consulta da UBS, evitando duplicação de canais.</span>
+          </li>
+          <li>
+            <strong>Integração com Sistemas Próprios / Privados (CELK)</strong>
+            <span>Escopo 100% delimitado ao PEC e-SUS APS para manter consistência nacional.</span>
+          </li>
+        </ul>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- SEÇÃO 2: DADOS E LGPD -->
+  <section id="dados">
+    <h2><span class="num">2</span> Regras Técnicas e LGPD</h2>
+    <div class="table-box">
+      <table>
+        <thead>
+          <tr>
+            <th>Eixo / Campo</th>
+            <th>Tipo / Opções</th>
+            <th>Regra de Negócio & Conformidade</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Operador (CBO)</strong></td>
+            <td><span class="chip">Validação C4</span></td>
+            <td>Apenas profissionais habilitados no Quadro 07 da Nota C4 (médico, enfermeiro, farmacêutico, fisioterapeuta, TO) concluem a avaliação para pontuar.</td>
+          </tr>
+          <tr>
+            <td><strong>Sensibilidade</strong></td>
+            <td><span class="chip">Monofilamento | IpTT</span></td>
+            <td>Opção de registrar o Teste de Toque de Ipswich (IpTT) quando a UBS não tiver o monofilamento de 10g (Diretriz SBD 2026 e IWGDF).</td>
+          </tr>
+          <tr>
+            <td><strong>Pior Pé</strong></td>
+            <td><span class="chip">Cálculo Automático</span></td>
+            <td>O risco geral do paciente é sempre o do pé com maior gravidade (Diretriz AHS e IWGDF).</td>
+          </tr>
+          <tr>
+            <td><strong>LGPD (Sensibilidade)</strong></td>
+            <td><span class="chip">Art. 5º e 11 LGPD</span></td>
+            <td><strong>Atendimento individual:</strong> dados detalhados para a equipe clínica.<br><strong>Gestão e busca ativa:</strong> dados estritamente agregados ou minimizados (princípio da necessidade).</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- SEÇÃO 3: EVOLUÇÃO CSD -->
+  <section id="csd">
+    <h2><span class="num">3</span> Rumo à Matriz CSD 3ª Versão</h2>
+    <div class="qa-grid">
+      <div class="qa-item">
+        <div class="qa-q">O que vira Certeza após a reunião do MoSCoW?</div>
+        <div class="qa-a">1. O escopo da solução é restrito ao PEC e-SUS APS (resolvendo a dúvida de sistemas privados como CELK).<br>2. Os 3 eixos essenciais de dados do exame e a lógica do IWGDF 2023 formam o núcleo obrigatório do produto.</div>
+      </div>
+      <div class="qa-item">
+        <div class="qa-q">O que a Persona (Jennifer) e o Mapa de Empatia (Karen) vão consolidar?</div>
+        <div class="qa-a">Que a falta de tempo na consulta de 15 a 20 minutos exige obrigatoriamente um formulário em botões de clique rápido com preenchimento em menos de 2 minutos.</div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    Universidade Federal de Santa Catarina · Mestrado Profissional em Informática em Saúde · Análise de Sistemas e UML
+  </footer>
+</div>
+
+</body>
+</html>
+
