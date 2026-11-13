@@ -3,43 +3,29 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Etapa de Definição & MVP · Avaliação do Pé Diabético no PEC e-SUS APS</title>
+<title>Etapa 3: Definição & MVP · Avaliação do Pé Diabético no PEC</title>
 <meta name="description" content="Síntese da etapa de Definição: Persona Camila Andrade, Mapa de Empatia, Canvas de Proposta de Valor e Priorização MoSCoW do MVP.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700;800;900&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg-1: hsl(225, 40%, 97%);
-    --bg-2: hsl(220, 35%, 92%);
-    --ink: hsl(225, 30%, 18%);
-    --ink-soft: hsl(225, 15%, 42%);
-    --line: hsl(222, 70%, 56%);
-    --line-deep: hsl(224, 64%, 44%);
-    --card: rgba(255, 255, 255, 0.88);
+    --ink: #1e293b;
+    --ink-soft: #64748b;
+    --border-dark: #1e293b;
 
-    --must: #059669;
-    --must-bg: #ecfdf5;
-    --must-border: #a7f3d0;
-
-    --should: #d97706;
-    --should-bg: #fffbeb;
-    --should-border: #fde68a;
-
-    --could: #2563eb;
-    --could-bg: #eff6ff;
-    --could-border: #bfdbfe;
-
-    --wont: #db2777;
-    --wont-bg: #fdf2f8;
-    --wont-border: #fbcfe8;
+    --must: #10b981;
+    --must-bg: #bbf7d0;
+    --should: #f59e0b;
+    --should-bg: #fef08a;
+    --could: #3b82f6;
+    --could-bg: #bfdbfe;
+    --wont: #ec4899;
+    --wont-bg: #fbcfe8;
 
     --csd-c: #059669;
-    --csd-c-bg: #ecfdf5;
     --csd-s: #d97706;
-    --csd-s-bg: #fffbeb;
     --csd-d: #dc2626;
-    --csd-d-bg: #fef2f2;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -47,11 +33,13 @@
     font-family: 'Inter', system-ui, sans-serif;
     color: var(--ink);
     line-height: 1.55;
-    background: radial-gradient(1200px 800px at 10% -10%, #fff 0%, transparent 60%),
-                radial-gradient(900px 600px at 100% 0%, hsla(222, 90%, 85%, .35) 0%, transparent 60%),
-                linear-gradient(160deg, var(--bg-1), var(--bg-2));
+    background-color: #fbfbfc;
+    background-image: 
+      linear-gradient(to right, rgba(148, 163, 184, 0.12) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(148, 163, 184, 0.12) 1px, transparent 1px);
+    background-size: 24px 24px;
     min-height: 100vh;
-    padding: 36px 20px 64px;
+    padding: 40px 20px 80px;
   }
   .wrap { width: min(1080px, 100%); margin: 0 auto; }
 
@@ -59,192 +47,155 @@
   .top-nav { margin-bottom: 24px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
   .btn-back {
     display: inline-flex; align-items: center; gap: 8px; text-decoration: none;
-    font-size: 14px; font-weight: 600; color: var(--line-deep);
-    padding: 8px 14px; background: rgba(255,255,255,0.7); border-radius: 8px;
-    border: 1px solid rgba(255,255,255,0.9); transition: all .2s;
+    font-size: 14px; font-weight: 800; color: #0f172a; padding: 8px 16px;
+    background: #fff; border: 2.5px solid var(--border-dark); border-radius: 999px;
+    box-shadow: 2px 3px 0 var(--border-dark); transition: all .15s;
   }
-  .btn-back:hover { background: #fff; transform: translateX(-2px); }
+  .btn-back:hover { transform: translate(-1px, -1px); box-shadow: 4px 5px 0 var(--border-dark); background: #f8fafc; }
 
   .doc-links { display: flex; gap: 8px; flex-wrap: wrap; }
   .btn-doc {
-    display: inline-flex; align-items: center; gap: 6px; padding: 8px 12px; border-radius: 8px;
-    font-size: 13px; font-weight: 600; text-decoration: none; background: #fff; color: var(--ink);
-    border: 1px solid rgba(30,40,90,.12); box-shadow: 0 2px 4px rgba(0,0,0,.04); transition: transform .2s;
+    display: inline-flex; align-items: center; gap: 6px; padding: 8px 14px; border-radius: 12px;
+    font-size: 13px; font-weight: 700; text-decoration: none; background: #fff; color: var(--ink);
+    border: 2px solid var(--border-dark); box-shadow: 2px 2px 0 var(--border-dark); transition: all .15s;
   }
-  .btn-doc:hover { transform: translateY(-1px); border-color: var(--line); }
+  .btn-doc:hover { transform: translate(-1px, -1px); box-shadow: 3px 4px 0 var(--border-dark); }
 
-  header { margin-bottom: 32px; }
-  .badge {
-    display: inline-block; padding: 4px 12px; border-radius: 999px;
-    font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .05em;
-    background: hsla(222, 70%, 56%, .12); color: var(--line-deep); margin-bottom: 12px;
+  /* Header Box */
+  .header-card {
+    background: #fff; border: 3px solid var(--border-dark); border-radius: 24px;
+    padding: 32px; box-shadow: 6px 8px 0 var(--border-dark); margin-bottom: 36px;
   }
-  h1 { font-family: 'Outfit', sans-serif; font-size: clamp(30px, 4vw, 42px); line-height: 1.1; letter-spacing: -.01em; }
-  h1 span { background: linear-gradient(90deg, var(--line-deep), hsl(275, 55%, 55%)); -webkit-background-clip: text; background-clip: text; color: transparent; }
-  .lead { margin-top: 10px; font-size: 16px; color: var(--ink-soft); max-width: 820px; }
+  .badge-step {
+    display: inline-block; padding: 4px 14px; border-radius: 999px;
+    font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: .08em;
+    background: #bbf7d0; color: #166534; border: 2px solid var(--border-dark);
+    box-shadow: 2px 2px 0 var(--border-dark); margin-bottom: 12px;
+  }
+  h1 { font-family: 'Outfit', sans-serif; font-size: clamp(30px, 4vw, 42px); font-weight: 900; letter-spacing: -.02em; margin-bottom: 10px; }
+  .lead { font-size: 16px; color: var(--ink-soft); max-width: 840px; }
 
   /* 4 Ferramentas da Definição */
   .tools-flow {
-    display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 36px;
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 36px;
   }
   .tool-step {
-    background: var(--card); border: 1px solid rgba(255,255,255,.95); border-radius: 14px;
-    padding: 16px 14px; text-align: center; box-shadow: 0 8px 16px -12px rgba(30,40,90,.25);
+    background: #fff; border: 2.5px solid var(--border-dark); border-radius: 16px;
+    padding: 18px 14px; text-align: center; box-shadow: 3px 4px 0 var(--border-dark);
   }
   .tool-step .t-num {
-    display: inline-flex; align-items: center; justify-content: center; width: 26px; height: 26px;
-    border-radius: 50%; background: var(--line); color: #fff; font-size: 12.5px; font-weight: 700;
-    margin-bottom: 6px;
+    display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px;
+    border-radius: 50%; background: #0f172a; color: #fff; font-size: 13px; font-weight: 800;
+    margin-bottom: 8px; border: 1.5px solid var(--border-dark);
   }
-  .tool-step h3 { font-size: 15px; font-family: 'Outfit'; margin-bottom: 2px; }
+  .tool-step h3 { font-size: 15px; font-family: 'Outfit'; font-weight: 800; margin-bottom: 4px; }
   .tool-step p { font-size: 12px; color: var(--ink-soft); line-height: 1.35; }
 
-  /* Flow dos 4 Passos do MVP */
-  .mvp-flow-box {
-    background: linear-gradient(135deg, hsl(222, 70%, 96%), hsl(220, 60%, 92%));
-    border: 1px solid rgba(255,255,255,.9); border-radius: 18px; padding: 24px; margin-bottom: 40px;
-    box-shadow: 0 16px 32px -20px rgba(30,40,90,.3);
-  }
-  .mvp-flow-box h2 { font-family: 'Outfit'; font-size: 22px; margin-bottom: 16px; color: var(--line-deep); display: flex; align-items: center; gap: 10px; }
-  .steps-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
-  .step-card {
-    background: #fff; border-radius: 14px; padding: 18px 14px; border: 1px solid rgba(30,40,90,.08);
-    position: relative; box-shadow: 0 4px 12px rgba(30,40,90,.05);
-  }
-  .step-card .badge-step {
-    font-size: 11px; font-weight: 700; color: var(--line-deep); background: hsla(222, 70%, 56%, .1);
-    padding: 2px 7px; border-radius: 4px; display: inline-block; margin-bottom: 8px;
-  }
-  .step-card h4 { font-size: 15px; font-family: 'Outfit'; margin-bottom: 6px; }
-  .step-card p { font-size: 12.8px; color: var(--ink-soft); line-height: 1.4; }
-  .highlight-decide { border-top: 4px solid var(--must); }
-
-  /* Grid MoSCoW */
-  .moscow-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; margin-bottom: 36px; }
-
-  .card-moscow {
-    background: var(--card); border-radius: 16px; padding: 22px;
-    border: 1px solid rgba(255,255,255,.9); box-shadow: 0 12px 28px -18px rgba(30,40,90,.25);
-    position: relative; overflow: hidden;
-  }
-  .card-moscow::before {
-    content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 6px;
-  }
-  .card-moscow.must::before { background: var(--must); }
-  .card-moscow.should::before { background: var(--should); }
-  .card-moscow.could::before { background: var(--could); }
-  .card-moscow.wont::before { background: var(--wont); }
-
-  .header-card { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 14px; }
-  .header-card h3 { font-family: 'Outfit', sans-serif; font-size: 19px; }
-  .header-card .tag-mvp {
-    font-size: 11.5px; font-weight: 700; text-transform: uppercase; padding: 3px 8px; border-radius: 6px;
-  }
-  .must .tag-mvp { background: var(--must-bg); color: var(--must); border: 1px solid var(--must-border); }
-  .should .tag-mvp { background: var(--should-bg); color: var(--should); border: 1px solid var(--should-border); }
-  .could .tag-mvp { background: var(--could-bg); color: var(--could); border: 1px solid var(--could-border); }
-  .wont .tag-mvp { background: var(--wont-bg); color: var(--wont); border: 1px solid var(--wont-border); }
-
-  .card-moscow ul { list-style: none; display: grid; gap: 12px; }
-  .card-moscow li { font-size: 13.8px; padding-left: 20px; position: relative; }
-  .card-moscow li::before {
-    content: "•"; position: absolute; left: 4px; font-size: 18px; line-height: 1; top: 1px;
-  }
-  .must li::before { color: var(--must); }
-  .should li::before { color: var(--should); }
-  .could li::before { color: var(--could); }
-  .wont li::before { color: var(--wont); }
-
-  .card-moscow li strong { color: var(--ink); display: block; margin-bottom: 2px; }
-  .card-moscow li span { color: var(--ink-soft); font-size: 13px; }
-
-  /* Persona Camila Box */
+  /* Persona Card */
   .persona-box {
-    background: var(--card); border-radius: 18px; border: 1px solid rgba(255,255,255,.9);
-    padding: 24px; box-shadow: 0 12px 28px -18px rgba(30,40,90,.25); margin-bottom: 36px;
-    display: grid; grid-template-columns: 240px 1fr; gap: 24px; align-items: start;
+    background: #fff; border-radius: 24px; border: 3px solid var(--border-dark);
+    padding: 30px; box-shadow: 6px 8px 0 var(--border-dark); margin-bottom: 36px;
+    display: grid; grid-template-columns: 240px 1fr; gap: 26px; align-items: start;
   }
   .persona-id {
-    background: #fff; border-radius: 14px; padding: 18px; border: 1px solid rgba(30,40,90,.08); text-align: center;
+    background: #f8fafc; border-radius: 16px; padding: 20px 16px; border: 2px solid var(--border-dark); text-align: center;
+    box-shadow: 3px 3px 0 var(--border-dark);
   }
   .persona-avatar {
-    width: 72px; height: 72px; border-radius: 50%; background: #e0f2fe; margin: 0 auto 10px;
-    display: grid; place-items: center; font-size: 28px;
+    width: 72px; height: 72px; border-radius: 50%; background: #fef08a; margin: 0 auto 10px;
+    display: grid; place-items: center; font-size: 32px; border: 2px solid var(--border-dark);
   }
-  .persona-id h4 { font-family: 'Outfit'; font-size: 18px; margin-bottom: 2px; }
-  .persona-id .role { font-size: 12.5px; color: var(--line-deep); font-weight: 600; margin-bottom: 8px; }
-  .persona-id .meta { font-size: 11.5px; color: var(--ink-soft); line-height: 1.4; }
+  .persona-id h4 { font-family: 'Outfit'; font-size: 19px; font-weight: 800; margin-bottom: 2px; }
+  .persona-id .role { font-size: 12.5px; color: #0369a1; font-weight: 700; margin-bottom: 8px; }
+  .persona-id .meta { font-size: 12px; color: var(--ink-soft); line-height: 1.4; }
 
-  .persona-details { display: grid; gap: 12px; }
   .p-quote {
-    font-style: italic; font-size: 14px; color: var(--line-deep); background: hsla(222, 70%, 56%, .06);
-    padding: 10px 14px; border-radius: 10px; border-left: 3px solid var(--line);
+    font-style: italic; font-size: 14.5px; color: #0f172a; background: #fef9c3;
+    padding: 12px 16px; border-radius: 12px; border: 2px solid var(--border-dark);
+    box-shadow: 2px 2px 0 var(--border-dark); margin-bottom: 14px;
   }
-  .p-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 4px; }
-  .p-col h5 { font-size: 13px; text-transform: uppercase; letter-spacing: .05em; color: var(--ink-soft); margin-bottom: 6px; }
-  .p-col ul { list-style: square inside; font-size: 13px; color: var(--ink); line-height: 1.45; }
+  .p-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .p-col h5 { font-size: 12.5px; text-transform: uppercase; letter-spacing: .06em; font-weight: 800; color: var(--ink-soft); margin-bottom: 6px; }
+  .p-col ul { list-style: square inside; font-size: 13.2px; color: var(--ink); line-height: 1.45; }
 
-  /* Nota Metodológica */
-  .callout-notes {
-    background: #fff; border-radius: 14px; padding: 18px 22px; border: 1px solid rgba(30,40,90,.1);
-    font-size: 13.5px; color: var(--ink); margin-bottom: 40px;
+  /* Fluxo dos 4 Passos */
+  .mvp-flow-box {
+    background: #fff; border: 3px solid var(--border-dark); border-radius: 24px; padding: 28px;
+    margin-bottom: 36px; box-shadow: 6px 8px 0 var(--border-dark);
   }
-  .callout-notes strong { color: var(--line-deep); }
+  .mvp-flow-box h2 { font-family: 'Outfit'; font-size: 22px; font-weight: 800; margin-bottom: 18px; }
+  .steps-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+  .step-card {
+    background: #f8fafc; border-radius: 16px; padding: 18px 14px; border: 2px solid var(--border-dark);
+    box-shadow: 3px 3px 0 var(--border-dark);
+  }
+  .step-card .badge-step-small {
+    font-size: 11px; font-weight: 800; color: #0f172a; background: #e2e8f0;
+    padding: 2px 7px; border-radius: 6px; display: inline-block; margin-bottom: 8px;
+    border: 1px solid var(--border-dark);
+  }
+  .step-card h4 { font-size: 15px; font-family: 'Outfit'; font-weight: 800; margin-bottom: 6px; }
+  .step-card p { font-size: 12.8px; color: var(--ink-soft); line-height: 1.4; }
+  .highlight-decide { background: #ecfdf5; border-color: #059669; }
 
-  /* Seção Matriz CSD 3ª versão */
-  .csd-section { margin-top: 20px; }
-  .csd-header-desc { margin-bottom: 20px; font-size: 14.5px; color: var(--ink-soft); }
-  .csd-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 32px; }
+  /* MoSCoW Grid */
+  .moscow-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; margin-bottom: 36px; }
+  .card-moscow {
+    background: #fff; border-radius: 20px; padding: 24px;
+    border: 2.8px solid var(--border-dark); box-shadow: 5px 6px 0 var(--border-dark);
+  }
+  .card-moscow.must { background: var(--must-bg); }
+  .card-moscow.should { background: var(--should-bg); }
+  .card-moscow.could { background: var(--could-bg); }
+  .card-moscow.wont { background: var(--wont-bg); }
+
+  .header-card-moscow { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 14px; }
+  .header-card-moscow h3 { font-family: 'Outfit', sans-serif; font-size: 20px; font-weight: 800; }
+  .header-card-moscow .tag-mvp {
+    font-size: 11.5px; font-weight: 800; text-transform: uppercase; padding: 3px 8px; border-radius: 6px;
+    background: #fff; border: 1.5px solid var(--border-dark); box-shadow: 1px 1px 0 var(--border-dark);
+  }
+
+  .card-moscow ul { list-style: square inside; display: grid; gap: 12px; }
+  .card-moscow li { font-size: 13.8px; }
+  .card-moscow li strong { color: var(--ink); display: block; margin-bottom: 2px; }
+  .card-moscow li span { color: #334155; font-size: 13px; }
+
+  /* Seção Matriz CSD */
+  .csd-box {
+    background: #fff; border: 3px solid var(--border-dark); border-radius: 24px; padding: 32px;
+    box-shadow: 6px 8px 0 var(--border-dark); margin-bottom: 36px;
+  }
+  .csd-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 20px 0; }
   .csd-col {
-    background: var(--card); border-radius: 16px; padding: 20px 18px;
-    border: 1px solid rgba(255,255,255,.95); box-shadow: 0 10px 24px -16px rgba(30,40,90,.2);
+    background: #f8fafc; border-radius: 18px; padding: 20px 16px; border: 2px solid var(--border-dark);
+    box-shadow: 3px 4px 0 var(--border-dark);
   }
   .csd-col-header {
-    display: flex; align-items: center; justify-content: space-between;
-    padding-bottom: 12px; margin-bottom: 14px; border-bottom: 2px solid;
+    display: flex; align-items: center; justify-content: space-between; padding-bottom: 10px; margin-bottom: 14px;
+    border-bottom: 2px solid var(--border-dark); font-family: 'Outfit'; font-weight: 800;
   }
-  .csd-col-header h3 { font-family: 'Outfit'; font-size: 18px; }
-  .csd-badge-count { font-size: 12px; font-weight: 700; padding: 2px 8px; border-radius: 999px; }
-
-  .col-certezas { border-top: 5px solid var(--csd-c); }
-  .col-certezas .csd-col-header { border-color: var(--csd-c); color: var(--csd-c); }
-  .col-certezas .csd-badge-count { background: var(--csd-c-bg); color: var(--csd-c); border: 1px solid #a7f3d0; }
-
-  .col-suposicoes { border-top: 5px solid var(--csd-s); }
-  .col-suposicoes .csd-col-header { border-color: var(--csd-s); color: var(--csd-s); }
-  .col-suposicoes .csd-badge-count { background: var(--csd-s-bg); color: var(--csd-s); border: 1px solid #fde68a; }
-
-  .col-duvidas { border-top: 5px solid var(--csd-d); }
-  .col-duvidas .csd-col-header { border-color: var(--csd-d); color: var(--csd-d); }
-  .col-duvidas .csd-badge-count { background: var(--csd-d-bg); color: var(--csd-d); border: 1px solid #fecaca; }
-
   .csd-list { list-style: none; display: grid; gap: 10px; }
   .csd-item {
-    background: #fff; border-radius: 10px; padding: 12px 14px; font-size: 13.2px; line-height: 1.45;
-    border: 1px solid rgba(30,40,90,.07); box-shadow: 0 2px 6px rgba(30,40,90,.03);
-    position: relative;
+    background: #fff; border-radius: 12px; padding: 12px; border: 1.5px solid var(--border-dark);
+    box-shadow: 2px 2px 0 var(--border-dark); font-size: 13px;
   }
-  .csd-item strong { display: block; color: var(--ink); margin-bottom: 3px; font-size: 13.5px; }
-  .csd-item span { color: var(--ink-soft); font-size: 12.3px; }
-  .tag-evolu {
-    display: inline-block; font-size: 10.5px; font-weight: 700; padding: 1px 6px; border-radius: 4px;
-    margin-bottom: 6px; text-transform: uppercase;
-  }
-  .tag-nova { background: #dbeafe; color: #1e40af; }
-  .tag-migrou { background: #dcfce7; color: #166534; }
-  .tag-ajustada { background: #fef3c7; color: #92400e; }
-  .tag-mantida { background: #f1f5f9; color: #475569; }
+  .csd-item strong { display: block; color: var(--ink); margin-bottom: 2px; }
+  .csd-item span { color: var(--ink-soft); font-size: 12px; }
 
   /* Tabela de Rastreabilidade */
-  .trace-box {
-    background: var(--card); border-radius: 16px; overflow: hidden;
-    border: 1px solid rgba(255,255,255,.95); box-shadow: 0 10px 24px -16px rgba(30,40,90,.2);
-    margin-top: 20px;
+  .trace-table-box {
+    border: 2px solid var(--border-dark); border-radius: 16px; overflow: hidden; margin-top: 24px;
   }
-  .trace-table { width: 100%; border-collapse: collapse; font-size: 13px; }
-  .trace-table th { background: rgba(30,40,90,.05); text-align: left; padding: 12px 16px; font-weight: 600; color: var(--ink); }
-  .trace-table td { padding: 12px 16px; border-bottom: 1px solid rgba(30,40,90,.05); vertical-align: top; }
-  .trace-table tr:last-child td { border-bottom: none; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th { background: #f1f5f9; padding: 12px 14px; text-align: left; font-weight: 800; border-bottom: 2px solid var(--border-dark); }
+  td { padding: 12px 14px; border-bottom: 1px solid #e2e8f0; vertical-align: top; }
+  tr:last-child td { border-bottom: none; }
+
+  footer {
+    text-align: center; font-size: 13px; color: var(--ink-soft); padding-top: 24px;
+    border-top: 2px solid rgba(0,0,0,0.06); margin-top: 40px;
+  }
 
   @media(max-width: 860px) {
     .tools-flow, .steps-row, .moscow-grid, .persona-box, .csd-grid { grid-template-columns: 1fr; }
@@ -256,34 +207,18 @@
 
 <div class="wrap">
   <nav class="top-nav">
-    <a href="../../index.html" class="btn-back">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-      Painel Geral do Projeto
-    </a>
+    <a href="../../index.html" class="btn-back">← Voltar para a Linha do Tempo</a>
     <div class="doc-links">
-      <a href="../02-imersao/index.html" class="btn-doc">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-        Etapa Anterior: Imersão
-      </a>
-      <a href="../../documentos/03-definicao/Persona_Camila_Andrade.pdf" class="btn-doc" target="_blank">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-        Ficha da Persona (PDF)
-      </a>
-      <a href="../../documentos/03-definicao/SLIDES%20Definicao%20MVP%20Pe%20Diabetico.pdf" class="btn-doc" target="_blank">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v12H4z"/><path d="M8 20l4-4 4 4"/></svg>
-        Slides da Definição (PDF)
-      </a>
-      <a href="../../documentos/03-definicao/NOVO%20MoSCoW%20%E2%80%94%20funcionalidades%20do%20produto.docx" class="btn-doc">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-        MoSCoW (DOCX)
-      </a>
+      <a href="../../documentos/03-definicao/Persona_Camila_Andrade.pdf" class="btn-doc" target="_blank">📄 Persona (PDF)</a>
+      <a href="../../documentos/03-definicao/SLIDES%20Definicao%20MVP%20Pe%20Diabetico.pdf" class="btn-doc" target="_blank">📊 Slides MVP (PDF)</a>
+      <a href="../../documentos/03-definicao/NOVO%20MoSCoW%20%E2%80%94%20funcionalidades%20do%20produto.docx" class="btn-doc">📝 MoSCoW (DOCX)</a>
     </div>
   </nav>
 
-  <header>
-    <div class="badge">Etapa de Definição & Síntese</div>
+  <header class="header-card">
+    <span class="badge-step">Etapa 3 · Em Andamento</span>
     <h1>Definição do Produto: <span>Persona, MoSCoW & MVP</span></h1>
-    <p class="lead">Sintetizamos os achados da imersão (entrevista, benchmarking e desk research) para delimitar a usuária-chave, seus ganhos e o escopo nuclear do MVP no PEC e-SUS APS.</p>
+    <p class="lead">Sintetizamos os achados da imersão para delimitar a usuária-chave, seus ganhos e o escopo nuclear do MVP no PEC e-SUS APS.</p>
   </header>
 
   <!-- 4 FERRAMENTAS -->
@@ -310,13 +245,13 @@
     </div>
   </div>
 
-  <!-- SEÇÃO PERSONA RESUMO -->
+  <!-- PERSONA -->
   <section class="persona-box">
     <div class="persona-id">
       <div class="persona-avatar">🩺</div>
       <h4>Camila Andrade</h4>
       <div class="role">Enfermeira da ESF · 29 anos</div>
-      <div class="meta">UBS de pequeno porte (área rural), 2 anos de APS. Usa o PEC diariamente.</div>
+      <div class="meta">UBS com área rural, 2 anos de APS. Usa o PEC diariamente.</div>
     </div>
     <div class="persona-details">
       <div class="p-quote">
@@ -345,288 +280,176 @@
     </div>
   </section>
 
-  <!-- FLUXO DO MVP: OS 4 PASSOS -->
+  <!-- FLUXO MVP: 4 PASSOS -->
   <section class="mvp-flow-box">
     <h2>O MVP na Consulta: do exame ao C4 em 4 passos</h2>
     <div class="steps-row">
       <div class="step-card">
-        <span class="badge-step">Passo 1</span>
+        <span class="badge-step-small">Passo 1</span>
         <h4>A profissional registra</h4>
         <p>Campos clicáveis por pé substituindo o texto livre: inspeção da pele, vascular (pulsos) e sensibilidade.</p>
       </div>
       <div class="step-card">
-        <span class="badge-step">Passo 2</span>
+        <span class="badge-step-small">Passo 2</span>
         <h4>O sistema sugere</h4>
-        <p>Calcula na hora a categoria IWGDF (0 a 3) pelo pior pé e exibe a justificativa clínica (ex.: <em>"Risco 2: PSP + Deformidade"</em>).</p>
+        <p>Calcula na hora a categoria IWGDF (0 a 3) pelo pior pé e exibe a justificativa clínica.</p>
       </div>
       <div class="step-card highlight-decide">
-        <span class="badge-step">Passo 3 (Decisão)</span>
+        <span class="badge-step-small">Passo 3 (Decisão)</span>
         <h4>A profissional decide</h4>
-        <p><strong>A clínica confirma ou altera a categoria</strong>. A IA/sistema não substitui o julgamento profissional; a categoria final é dela.</p>
+        <p><strong>A clínica confirma ou altera a categoria</strong>. A IA/sistema não substitui o julgamento profissional.</p>
       </div>
       <div class="step-card">
-        <span class="badge-step">Passo 4</span>
+        <span class="badge-step-small">Passo 4</span>
         <h4>O PEC lança o código</h4>
-        <p>Disparo automático do SIGTAP <code>03.01.04.009-5</code> só com a avaliação completa e assinada por profissional do Quadro 07.</p>
+        <p>Disparo automático do SIGTAP <code>03.01.04.009-5</code> só com a avaliação completa e assinada pelo Quadro 07.</p>
       </div>
     </div>
   </section>
 
-  <!-- SEÇÃO MOSCOW CONSOLIDADA -->
-  <section id="moscow">
-    <div class="moscow-grid">
-      
-      <!-- MUST -->
-      <article class="card-moscow must">
-        <div class="header-card">
-          <h3>Must have</h3>
-          <span class="tag-mvp">O MVP (Núcleo)</span>
-        </div>
-        <ul>
-          <li>
-            <strong>Formulário Estruturado do Exame do Pé</strong>
-            <span>Campos clicáveis por pé (pele, vascular e sensibilidade) substituindo o texto livre de 250 caracteres. Curto, cabendo na consulta da UBS, e registrando o teste usado.</span>
-          </li>
-          <li>
-            <strong>Classificação de Risco Sugerida pelo Sistema</strong>
-            <span>Calcula a categoria oficial do IWGDF (0 a 3) a partir dos achados e explicita o motivo clínico na tela.</span>
-          </li>
-          <li>
-            <strong>Confirmação pela Profissional</strong>
-            <span>A enfermeira/médico confirma ou altera a categoria sugerida; a categoria final validada fica salva estruturada no PEC.</span>
-          </li>
-          <li>
-            <strong>Lançamento Automático do SIGTAP 03.01.04.009-5</strong>
-            <span>Lançado diretamente na ficha apenas após a avaliação completa e se assinada por profissional habilitado (Quadro 07 da Nota C4).</span>
-          </li>
-        </ul>
-      </article>
+  <!-- MOSCOW -->
+  <section class="moscow-grid">
+    <article class="card-moscow must">
+      <div class="header-card-moscow">
+        <h3>Must have</h3>
+        <span class="tag-mvp">O MVP</span>
+      </div>
+      <ul>
+        <li>
+          <strong>Formulário Estruturado do Exame do Pé</strong>
+          <span>Campos clicáveis por pé (pele, vascular e sensibilidade) substituindo o texto livre de 250 caracteres.</span>
+        </li>
+        <li>
+          <strong>Classificação de Risco Sugerida</strong>
+          <span>Calcula a categoria oficial do IWGDF (0 a 3) e explicita o motivo clínico na tela.</span>
+        </li>
+        <li>
+          <strong>Confirmação pela Profissional</strong>
+          <span>A enfermeira/médico confirma ou altera a categoria sugerida; a categoria final validada fica salva.</span>
+        </li>
+        <li>
+          <strong>Lançamento Automático do SIGTAP 03.01.04.009-5</strong>
+          <span>Lançado diretamente na ficha apenas após a avaliação completa por profissional do Quadro 07.</span>
+        </li>
+      </ul>
+    </article>
 
-      <!-- SHOULD -->
-      <article class="card-moscow should">
-        <div class="header-card">
-          <h3>Should have</h3>
-          <span class="tag-mvp">Próxima Versão</span>
-        </div>
-        <ul>
-          <li>
-            <strong>Data de Retorno Sugerida</strong>
-            <span>Indicação de aprazamento conforme o risco oficial do PCDT DM2 (12m, 6–12m, 3–6m ou 1–3m).</span>
-          </li>
-          <li>
-            <strong>Avaliação Anterior Visível</strong>
-            <span>Exibição rápida do último exame e reaproveitamento de dados prévios já cadastrados no PEC (amputação, ferida prévia).</span>
-          </li>
-          <li>
-            <strong>Alertas de Urgência Imediata</strong>
-            <span>Destaque visual em vermelho para úlcera ativa, suspeita de infecção, isquemia crítica ou Pé de Charcot.</span>
-          </li>
-          <li>
-            <strong>Teste de Ipswich (IpTT) como Alternativa</strong>
-            <span>Opção para UBS sem monofilamento, acompanhada de aviso de que não substitui o teste recomendado pelo PCDT.</span>
-          </li>
-        </ul>
-      </article>
+    <article class="card-moscow should">
+      <div class="header-card-moscow">
+        <h3>Should have</h3>
+        <span class="tag-mvp">Próxima Versão</span>
+      </div>
+      <ul>
+        <li>
+          <strong>Data de Retorno Sugerida</strong>
+          <span>Aprazamento conforme o risco oficial do PCDT DM2 (12m, 6–12m, 3–6m ou 1–3m).</span>
+        </li>
+        <li>
+          <strong>Avaliação Anterior Visível</strong>
+          <span>Exibição rápida do último exame e reaproveitamento de dados prévios já cadastrados no PEC.</span>
+        </li>
+        <li>
+          <strong>Alertas de Urgência Imediata</strong>
+          <span>Destaque visual em vermelho para úlcera ativa, suspeita de infecção ou Pé de Charcot.</span>
+        </li>
+        <li>
+          <strong>Teste de Ipswich (IpTT) como Alternativa</strong>
+          <span>Opção para UBS sem monofilamento, acompanhada de aviso clínico.</span>
+        </li>
+      </ul>
+    </article>
 
-      <!-- COULD -->
-      <article class="card-moscow could">
-        <div class="header-card">
-          <h3>Could have</h3>
-          <span class="tag-mvp">Desejável</span>
-        </div>
-        <ul>
-          <li>
-            <strong>Lista Temática de Pacientes</strong>
-            <span>Filtro nominal de pacientes por categoria de risco e identificação dos exames em atraso para busca ativa.</span>
-          </li>
-          <li>
-            <strong>Agendamento do Retorno no PEC</strong>
-            <span>Integração direta com o módulo de agenda do prontuário eletrônico.</span>
-          </li>
-          <li>
-            <strong>Dados Agregados para a Gestão</strong>
-            <span>Visão macro e relatórios gerenciais para o coordenador da UBS e município (LGPD).</span>
-          </li>
-          <li>
-            <strong>Orientações de Autocuidado</strong>
-            <span>Guia formatado com instruções diárias de cuidado para imprimir e entregar ao paciente.</span>
-          </li>
-        </ul>
-      </article>
+    <article class="card-moscow could">
+      <div class="header-card-moscow">
+        <h3>Could have</h3>
+        <span class="tag-mvp">Desejável</span>
+      </div>
+      <ul>
+        <li>
+          <strong>Lista Temática de Pacientes</strong>
+          <span>Filtro nominal por categoria de risco e identificação dos exames em atraso para busca ativa.</span>
+        </li>
+        <li>
+          <strong>Agendamento do Retorno no PEC</strong>
+          <span>Integração direta com o módulo de agenda do prontuário.</span>
+        </li>
+        <li>
+          <strong>Dados Agregados para a Gestão</strong>
+          <span>Relatórios gerenciais anonimizados para a gestão da UBS (LGPD).</span>
+        </li>
+        <li>
+          <strong>Orientações de Autocuidado</strong>
+          <span>Guia formatado com instruções diárias para imprimir e entregar ao paciente.</span>
+        </li>
+      </ul>
+    </article>
 
-      <!-- WONT -->
-      <article class="card-moscow wont">
-        <div class="header-card">
-          <h3>Won't have</h3>
-          <span class="tag-mvp">Por Enquanto</span>
-        </div>
-        <ul>
-          <li>
-            <strong>Aplicativo Separado do PEC ou para o Paciente</strong>
-            <span>Evita duplicar cadastros e canais fora do fluxo do prontuário oficial.</span>
-          </li>
-          <li>
-            <strong>Uso em Tablet ou em Visita Domiciliar</strong>
-            <span>Primeiro ciclo focado na rotina interna da consulta da UBS.</span>
-          </li>
-          <li>
-            <strong>Análise de Fotos por Inteligência Artificial</strong>
-            <span>Exige infraestrutura de visão computacional fora da realidade atual da APS.</span>
-          </li>
-          <li>
-            <strong>Envio pelo LEDI e Sistemas Próprios (CELK)</strong>
-            <span>Foco 100% delimitado ao PEC e-SUS APS para preservar viabilidade de entrega.</span>
-          </li>
-        </ul>
-      </article>
-
-    </div>
+    <article class="card-moscow wont">
+      <div class="header-card-moscow">
+        <h3>Won't have</h3>
+        <span class="tag-mvp">Por Enquanto</span>
+      </div>
+      <ul>
+        <li>
+          <strong>Aplicativo Separado do PEC</strong>
+          <span>Evita duplicar cadastros fora do fluxo do prontuário oficial.</span>
+        </li>
+        <li>
+          <strong>Uso em Tablet ou Domiciliar</strong>
+          <span>Primeiro ciclo focado na rotina interna da consulta da UBS.</span>
+        </li>
+        <li>
+          <strong>Análise de Fotos por IA</strong>
+          <span>Exige infraestrutura de visão computacional fora da realidade atual da APS.</span>
+        </li>
+        <li>
+          <strong>Envio pelo LEDI e Sistemas Próprios (CELK)</strong>
+          <span>Foco 100% delimitado ao PEC e-SUS APS para preservar viabilidade de entrega.</span>
+        </li>
+      </ul>
+    </article>
   </section>
 
-  <!-- NOTAS METODOLÓGICAS -->
-  <div class="callout-notes">
-    <strong>Justificativas Metodológicas e Normativas:</strong>
-    <ul style="margin-top: 8px; margin-left: 18px; line-height: 1.5;">
-      <li><strong>Prazos de Retorno conferidos:</strong> O PCDT DM2 (Portaria SCTIE/MS nº 13/2026, Material Suplementar E, Quadro S1) adota a tabela do IWGDF 2023: risco 0 (anual), risco 1 (6–12 meses), risco 2 (3–6 meses) e risco 3 (1–3 meses).</li>
-      <li><strong>Por que o Ipswich ficou em Should have?</strong> O PCDT recomenda expressamente pelo menos dois testes de sensibilidade sendo um deles o monofilamento de 10g. O IpTT entra como alternativa com aviso clínico para não comprometer a conformidade legal inicial.</li>
-      <li><strong>O achado-chave da entrevista:</strong> A inteligência de dados sugere o risco, mas a profissional humana é quem valida, preservando sua autonomia clínica e assegurando a adesão ao PEC.</li>
-    </ul>
-  </div>
-
-  <!-- SEÇÃO MATRIZ CSD 3ª VERSÃO -->
-  <section class="csd-section" id="csd3">
-    <div class="badge" style="background: hsla(160, 84%, 39%, .15); color: #065f46;">Evolução Contínua do Conhecimento</div>
-    <h2 style="font-family: 'Outfit'; font-size: 26px; margin-top: 6px; margin-bottom: 8px;">Matriz CSD · 3ª Versão (Pós-Definição e MVP)</h2>
-    <p class="csd-header-desc">Consolidação das Certezas, Suposições e Dúvidas após a construção da Persona Camila Andrade, do Mapa de Empatia, do Canvas de Valor e do consenso do MoSCoW.</p>
+  <!-- MATRIZ CSD 3ª VERSÃO -->
+  <section class="csd-box">
+    <h2>Matriz CSD · 3ª Versão (Pós-Definição e MVP)</h2>
+    <p style="color: var(--ink-soft); font-size: 14.5px;">Consolidação das Certezas, Suposições e Dúvidas após a construção da Persona Camila Andrade e do MoSCoW.</p>
 
     <div class="csd-grid">
-      <!-- CERTEZAS -->
-      <div class="csd-col col-certezas">
-        <div class="csd-col-header">
-          <h3>Certezas</h3>
-          <span class="csd-badge-count">9 certezas</span>
-        </div>
+      <div class="csd-col">
+        <div class="csd-col-header" style="color: var(--csd-c);">Certezas (9)</div>
         <ul class="csd-list">
-          <li class="csd-item">
-            <span class="tag-evolu tag-mantida">Mantida</span>
-            <strong>Boa prática F vale 15 pontos no C4</strong>
-            <span>1 avaliação anual dos pés, restrita aos CBOs habilitados do Quadro 07 (Nota Metodológica C4).</span>
-          </li>
-          <li class="csd-item">
-            <span class="tag-evolu tag-mantida">Mantida</span>
-            <strong>PEC registra só texto livre e código SIGTAP</strong>
-            <span>Campo de 250 caracteres por perna sem qualquer classificação de risco clínica.</span>
-          </li>
-          <li class="csd-item">
-            <span class="tag-evolu tag-mantida">Mantida</span>
-            <strong>PCDT DM2 2026 adota o IWGDF 2023</strong>
-            <span>Estratificação de 0 a 3 é a norma federal vigente (Portaria SCTIE nº 13/2026).</span>
-          </li>
-          <li class="csd-item">
-            <span class="tag-evolu tag-mantida">Mantida</span>
-            <strong>Falta de instrumentos em UBSs da ponta</strong>
-            <span>Monofilamento e diapasão não são universais na atenção primária brasileira.</span>
-          </li>
-          <li class="csd-item">
-            <span class="tag-evolu tag-migrou">Virou Certeza</span>
-            <strong>Usuária-chave é a Enfermeira da ESF</strong>
-            <span>Persona Camila validada: é a enfermagem quem faz a rotina do exame; o médico entra nos casos agravados.</span>
-          </li>
-          <li class="csd-item">
-            <span class="tag-evolu tag-migrou">Virou Certeza</span>
-            <strong>A profissional humana quer e deve decidir</strong>
-            <span>O sistema sugere a categoria e a justificativa clínica, mas a enfermeira/médico confirma ou altera.</span>
-          </li>
-          <li class="csd-item">
-            <span class="tag-evolu tag-migrou">Virou Certeza</span>
-            <strong>Escopo delimitado 100% ao PEC e-SUS APS</strong>
-            <span>Sistemas municipais próprios (CELK) e apps externos foram classificados como Won't have no MoSCoW.</span>
-          </li>
-          <li class="csd-item">
-            <span class="tag-evolu tag-migrou">Virou Certeza</span>
-            <strong>Disparo automático do SIGTAP 03.01.04.009-5</strong>
-            <span>O código só deve ser lançado pelo PEC quando o exame estiver completo por profissional autorizado.</span>
-          </li>
-          <li class="csd-item">
-            <span class="tag-evolu tag-nova">Nova</span>
-            <strong>Dupla anotação é a principal fonte de ineficiência</strong>
-            <span>A usuária gasta tempo anotando na ficha de papel/pasta e redigitando texto livre no PEC.</span>
-          </li>
+          <li class="csd-item"><strong>Boa prática F vale 15 pontos no C4</strong><span>Avaliação anual restrita aos CBOs do Quadro 07.</span></li>
+          <li class="csd-item"><strong>PEC registra só texto livre e SIGTAP</strong><span>250 caracteres por perna sem classificação de risco.</span></li>
+          <li class="csd-item"><strong>PCDT DM2 2026 adota IWGDF 2023</strong><span>Estratificação de 0 a 3 é a regra federal vigente.</span></li>
+          <li class="csd-item"><strong>Usuária-chave é a Enfermeira da ESF</strong><span>Persona Camila: é a enfermagem quem faz o exame na rotina.</span></li>
+          <li class="csd-item"><strong>A profissional humana quer e deve decidir</strong><span>O sistema sugere; a clínica confirma ou altera.</span></li>
+          <li class="csd-item"><strong>Escopo delimitado 100% ao PEC</strong><span>Sistemas próprios (CELK) descartados no MoSCoW.</span></li>
         </ul>
       </div>
 
-      <!-- SUPOSIÇÕES -->
-      <div class="csd-col col-suposicoes">
-        <div class="csd-col-header">
-          <h3>Suposições</h3>
-          <span class="csd-badge-count">5 suposições</span>
-        </div>
+      <div class="csd-col">
+        <div class="csd-col-header" style="color: var(--csd-s);">Suposições (5)</div>
         <ul class="csd-list">
-          <li class="csd-item">
-            <span class="tag-evolu tag-ajustada">Reforçada</span>
-            <strong>Formulário clicável em 4 passos cabe na consulta</strong>
-            <span>Supõe-se que botões de clique rápido reduzem o tempo de registro para menos de 2 minutos, viabilizando o exame na rotina cheia.</span>
-          </li>
-          <li class="csd-item">
-            <span class="tag-evolu tag-ajustada">Reforçada</span>
-            <strong>Profissional confia na sugestão explicada</strong>
-            <span>A indicação clara do motivo (ex.: "Risco 2 por PSP + Deformidade") gera transparência e adesão ao algoritmo do IWGDF.</span>
-          </li>
-          <li class="csd-item">
-            <span class="tag-evolu tag-ajustada">Reforçada</span>
-            <strong>Código é lançado hoje sem exame completo</strong>
-            <span>Por pressão de metas e falta de campos clínicos, o procedimento é faturado sem que o pé tenha sido avaliado nos 3 eixos.</span>
-          </li>
-          <li class="csd-item">
-            <span class="tag-evolu tag-nova">Nova</span>
-            <strong>Aviso sobre o teste de Ipswich incentiva adesão segura</strong>
-            <span>O aviso clínico de que o IpTT é contingencial no Should have educa o profissional sem bloquear o atendimento da UBS sem recursos.</span>
-          </li>
-          <li class="csd-item">
-            <span class="tag-evolu tag-mantida">Mantida</span>
-            <strong>A busca ativa no PEC aumentará o retorno no prazo</strong>
-            <span>Com o risco gravado no prontuário, a equipe e o ACS conseguirão resgatar pacientes de alto risco (graus 2 e 3) antes de complicarem.</span>
-          </li>
+          <li class="csd-item"><strong>Formulário clicável cabe na consulta</strong><span>Botões rápidos reduzem o tempo para menos de 2 minutos.</span></li>
+          <li class="csd-item"><strong>Profissional confia na sugestão explicada</strong><span>Transparência da regra gera adesão clínica.</span></li>
+          <li class="csd-item"><strong>Código é lançado sem exame completo</strong><span>Pressão de metas faz o procedimento ser faturado vazio.</span></li>
+          <li class="csd-item"><strong>Aviso do Ipswich incentiva adesão segura</strong><span>Permite avaliar na UBS sem monofilamento sem violar a norma.</span></li>
         </ul>
       </div>
 
-      <!-- DÚVIDAS -->
-      <div class="csd-col col-duvidas">
-        <div class="csd-col-header">
-          <h3>Dúvidas</h3>
-          <span class="csd-badge-count">4 dúvidas</span>
-        </div>
+      <div class="csd-col">
+        <div class="csd-col-header" style="color: var(--csd-d);">Dúvidas (4)</div>
         <ul class="csd-list">
-          <li class="csd-item">
-            <span class="tag-evolu tag-mantida">Mantida</span>
-            <strong>Qual é o cumprimento real da boa prática F no Brasil?</strong>
-            <span>Depende de extração agregada de dados nacionais do SISAB/Datasus para mensurar a linha de base.</span>
-          </li>
-          <li class="csd-item">
-            <span class="tag-evolu tag-mantida">Mantida</span>
-            <strong>A rotina da Camila se repete igualmente em grandes centros urbanos?</strong>
-            <span>A persona baseia-se em UBS com área rural; a dinâmica em capitais com equipes de apoio e residência pode variar.</span>
-          </li>
-          <li class="csd-item">
-            <span class="tag-evolu tag-mantida">Mantida</span>
-            <strong>Os médicos aceitarão preencher o mesmo formulário da enfermagem?</strong>
-            <span>Investigar na prototipação e validação se o fluxo de atendimento médico no SOAP aceita bem o componente compartilhado.</span>
-          </li>
-          <li class="csd-item">
-            <span class="tag-evolu tag-nova">Nova</span>
-            <strong>Qual a taxa de divergência entre a sugestão do sistema e a decisão clínica?</strong>
-            <span>Medir quantas vezes a profissional altera a categoria sugerida pelo IWGDF durante a fase de validação do protótipo.</span>
-          </li>
+          <li class="csd-item"><strong>Cumprimento real do C4 no Brasil?</strong><span>Requer extração agregada do SISAB para linha de base.</span></li>
+          <li class="csd-item"><strong>Rotina se repete em grandes capitais?</strong><span>Validar se UBSs com residência têm dinâmica diferente.</span></li>
+          <li class="csd-item"><strong>Médicos aceitarão formulário compartilhado?</strong><span>Investigar no SOAP da consulta médica.</span></li>
         </ul>
       </div>
     </div>
 
-    <!-- TABELA DE RASTREABILIDADE -->
-    <div class="trace-box">
-      <div style="padding: 16px 20px; background: rgba(30,40,90,.03); border-bottom: 1px solid rgba(30,40,90,.08);">
-        <strong style="font-size: 14px; color: var(--ink);">Rastreabilidade: Da CSD 2ª versão para a 3ª versão (O que a Definição mudou)</strong>
-      </div>
-      <table class="trace-table">
+    <div class="trace-table-box">
+      <table>
         <thead>
           <tr>
             <th>Item na CSD 2ª versão</th>
@@ -636,24 +459,19 @@
         </thead>
         <tbody>
           <tr>
-            <td><strong>D:</strong> A solução vale só para o PEC ou também sistemas próprios (CELK)?</td>
-            <td><span class="tag-evolu tag-migrou">Virou Certeza</span></td>
-            <td>MoSCoW consensual: integração com sistemas próprios classificada como <strong>Won't have</strong> para viabilizar o MVP.</td>
+            <td>A solução vale só para o PEC ou outros (CELK)?</td>
+            <td><strong>Virou Certeza</strong></td>
+            <td>Sistemas próprios foram classificados como Won't have no MoSCoW.</td>
           </tr>
           <tr>
-            <td><strong>S:</strong> Profissionais confiariam num risco calculado pelo sistema?</td>
-            <td><span class="tag-evolu tag-migrou">Virou Certeza</span> (com ajuste)</td>
-            <td>Entrevista (P13) e Persona: a profissional confia desde que o sistema <strong>sugira e ela confirme/altere</strong> (Passo 3 do MVP).</td>
+            <td>Profissionais confiariam no risco calculado?</td>
+            <td><strong>Virou Certeza</strong></td>
+            <td>Entrevista (P13): confia desde que o sistema <strong>sugira e ela confirme/altere</strong>.</td>
           </tr>
           <tr>
-            <td><strong>D:</strong> Quem faz o exame na prática?</td>
-            <td><span class="tag-evolu tag-migrou">Virou Certeza</span></td>
-            <td>Persona Camila Andrade formalizada como usuária primária (enfermeira da ESF); médico nos casos agravados.</td>
-          </tr>
-          <tr>
-            <td><strong>S:</strong> Um formulário com botões clicáveis rápidos aumentará a adesão?</td>
-            <td><span class="tag-evolu tag-ajustada">Reforçada no MVP</span></td>
-            <td>Canvas de Valor: campos clicáveis por pé são o analgésico direto da dor de digitar em 250 caracteres na consulta corrida.</td>
+            <td>Quem faz o exame na prática?</td>
+            <td><strong>Virou Certeza</strong></td>
+            <td>Persona Camila Andrade formalizada como usuária primária da APS.</td>
           </tr>
         </tbody>
       </table>
@@ -661,7 +479,7 @@
   </section>
 
   <footer>
-    Universidade Federal de Santa Catarina · Mestrado Profissional em Informática em Saúde · Análise de Sistemas e UML
+    Universidade Federal de Santa Catarina · Mestrado Profissional em Informática em Saúde · 2026
   </footer>
 </div>
 
