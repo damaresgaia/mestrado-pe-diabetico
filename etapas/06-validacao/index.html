@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Etapa 6: Validação · Instruções da Etapa</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-card: #e2e8f0;
+    --border-color: #334155;
+    --ink: #0f172a;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Inter', system-ui, sans-serif; color: #1e293b; line-height: 1.6;
+    background-color: #fbfbfc;
+    background-image: 
+      linear-gradient(to right, rgba(100, 116, 139, 0.08) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(100, 116, 139, 0.08) 1px, transparent 1px);
+    background-size: 24px 24px;
+    min-height: 100vh; padding: 40px 20px 80px;
+  }
+  .wrap { width: min(860px, 100%); margin: 0 auto; }
+  .top-nav { margin-bottom: 24px; }
+  .btn-back {
+    display: inline-flex; align-items: center; gap: 8px; text-decoration: none;
+    font-size: 14px; font-weight: 700; color: #1e293b; padding: 8px 16px;
+    background: #fff; border: 2px solid #0f172a; border-radius: 999px;
+    box-shadow: 2px 3px 0 #0f172a; transition: all .15s;
+  }
+  .btn-back:hover { transform: translate(-1px, -1px); box-shadow: 4px 5px 0 #0f172a; }
+
+  .content-card {
+    background: #fff; border: 3px solid #0f172a; border-radius: 24px; padding: 36px;
+    box-shadow: 6px 8px 0 #0f172a; margin-bottom: 30px;
+  }
+  .badge-step {
+    display: inline-block; padding: 4px 14px; border-radius: 999px; font-size: 12px;
+    font-weight: 800; text-transform: uppercase; letter-spacing: .08em;
+    background: var(--bg-card); color: var(--border-color); border: 2px solid var(--border-color); margin-bottom: 12px;
+  }
+  h1 { font-family: 'Outfit', sans-serif; font-size: 34px; letter-spacing: -.02em; margin-bottom: 12px; }
+  .sub { font-size: 16px; color: #64748b; margin-bottom: 24px; }
+
+  .instruction-alert {
+    background: #f1f5f9; border: 2px solid #cbd5e1; border-left: 6px solid #475569;
+    border-radius: 14px; padding: 18px 20px; font-size: 15px; color: #334155; margin-bottom: 28px;
+  }
+
+  h2 { font-family: 'Outfit', sans-serif; font-size: 22px; margin: 24px 0 12px; color: #0f172a; }
+  ol { padding-left: 20px; margin-bottom: 24px; }
+  li { margin-bottom: 12px; font-size: 15px; }
+  li strong { color: #0f172a; }
+
+  .box-method {
+    background: #f8fafc; border: 2px dashed #94a3b8; border-radius: 16px; padding: 20px; margin-top: 24px;
+    font-size: 14px; color: #475569;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top-nav">
+    <a href="../../index.html" class="btn-back">← Voltar para a Linha do Tempo</a>
+  </div>
+
+  <article class="content-card">
+    <span class="badge-step">Etapa 6 · Planejada</span>
+    <h1>Etapa de Validação & Testes com Usuários</h1>
+    <p class="sub">Avaliação empírica do protótipo com profissionais da APS (Wazlawick et al., 2025, Capítulo 9).</p>
+
+    <div class="instruction-alert">
+      📌 <strong>Instruções para o Grupo:</strong> A última etapa fecha o ciclo científico do mestrado, colocando o protótipo nas mãos de enfermeiros e médicos reais para avaliar se a solução atende à usabilidade esperada pela Persona Camila.
+    </div>
+
+    <h2>Roteiro do que devemos produzir:</h2>
+    <ol>
+      <li><strong>Sessões de Testes de Usabilidade com Roteiro de Tarefas:</strong>
+        Convidar profissionais habilitados da Atenção Primária para executar a tarefa de avaliar um pé diabético simulado no protótipo.
+      </li>
+      <li><strong>Métricas de Desempenho e Eficácia:</strong>
+        • <em>Tempo de Conclusão:</em> Medir se o formulário realmente é preenchido em menos de 2 minutos durante a consulta.<br>
+        • <em>Taxa de Erros e Dúvidas:</em> Verificar se algum campo ou botão causou hesitação.<br>
+        • <em>Concordância da Classificação:</em> Medir a aceitação da sugestão do IWGDF (quantas vezes a profissional confirmou vs. alterou a categoria).
+      </li>
+      <li><strong>Aplicação da Escala SUS (System Usability Scale):</strong>
+        Aplicar o questionário padronizado de 10 perguntas do SUS para obter a nota científica de usabilidade do sistema (meta: pontuação > 75).
+      </li>
+      <li><strong>Fechamento da Matriz CSD (Versão Final):</strong>
+        Validar as últimas dúvidas e suposições da pesquisa, registrando os aprendizados no relatório final da disciplina.
+      </li>
+    </ol>
+
+    <div class="box-method">
+      📖 <strong>Referência Metodológica:</strong> Livro <em>Desenvolvimento de Software Centrado no Usuário</em>, Capítulo 9 (Avaliação de Usabilidade) e Seção 9.3 (Métricas e questionários padronizados).
+    </div>
+  </article>
+</div>
+</body>
+</html>

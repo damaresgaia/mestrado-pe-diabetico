@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Etapa 4: Ideação · Instruções da Etapa</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-card: #fef08a;
+    --border-color: #854d0e;
+    --ink: #422006;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Inter', system-ui, sans-serif; color: #1e293b; line-height: 1.6;
+    background-color: #fbfbfc;
+    background-image: 
+      linear-gradient(to right, rgba(100, 116, 139, 0.08) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(100, 116, 139, 0.08) 1px, transparent 1px);
+    background-size: 24px 24px;
+    min-height: 100vh; padding: 40px 20px 80px;
+  }
+  .wrap { width: min(860px, 100%); margin: 0 auto; }
+  .top-nav { margin-bottom: 24px; }
+  .btn-back {
+    display: inline-flex; align-items: center; gap: 8px; text-decoration: none;
+    font-size: 14px; font-weight: 700; color: #1e293b; padding: 8px 16px;
+    background: #fff; border: 2px solid #0f172a; border-radius: 999px;
+    box-shadow: 2px 3px 0 #0f172a; transition: all .15s;
+  }
+  .btn-back:hover { transform: translate(-1px, -1px); box-shadow: 4px 5px 0 #0f172a; }
+
+  .content-card {
+    background: #fff; border: 3px solid #0f172a; border-radius: 24px; padding: 36px;
+    box-shadow: 6px 8px 0 #0f172a; margin-bottom: 30px;
+  }
+  .badge-step {
+    display: inline-block; padding: 4px 14px; border-radius: 999px; font-size: 12px;
+    font-weight: 800; text-transform: uppercase; letter-spacing: .08em;
+    background: var(--bg-card); color: var(--border-color); border: 2px solid var(--border-color); margin-bottom: 12px;
+  }
+  h1 { font-family: 'Outfit', sans-serif; font-size: 34px; letter-spacing: -.02em; margin-bottom: 12px; }
+  .sub { font-size: 16px; color: #64748b; margin-bottom: 24px; }
+
+  .instruction-alert {
+    background: #fefce8; border: 2px solid #fde047; border-left: 6px solid #ca8a04;
+    border-radius: 14px; padding: 18px 20px; font-size: 15px; color: #713f12; margin-bottom: 28px;
+  }
+
+  h2 { font-family: 'Outfit', sans-serif; font-size: 22px; margin: 24px 0 12px; color: #0f172a; }
+  ol { padding-left: 20px; margin-bottom: 24px; }
+  li { margin-bottom: 12px; font-size: 15px; }
+  li strong { color: #0f172a; }
+
+  .box-method {
+    background: #f8fafc; border: 2px dashed #94a3b8; border-radius: 16px; padding: 20px; margin-top: 24px;
+    font-size: 14px; color: #475569;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top-nav">
+    <a href="../../index.html" class="btn-back">← Voltar para a Linha do Tempo</a>
+  </div>
+
+  <article class="content-card">
+    <span class="badge-step">Etapa 4 · Em Breve</span>
+    <h1>Etapa de Ideação & Arquitetura</h1>
+    <p class="sub">Geração de alternativas de solução e estruturação dos fluxos (Wazlawick et al., 2025, Capítulo 7).</p>
+
+    <div class="instruction-alert">
+      📌 <strong>Instruções para o Grupo:</strong> Esta etapa começará logo após a entrega da etapa de Definição. O foco principal não é programar, mas sim gerar o máximo de ideias visuais sobre como o formulário se encaixa na tela de atendimento do PEC.
+    </div>
+
+    <h2>Roteiro do que devemos produzir:</h2>
+    <ol>
+      <li><strong>Mapeamento do Fluxo da Consulta (Diagrama de Atividades):</strong>
+        Desenhar o fluxo pelo qual a enfermeira Camila navega no PEC: Início da Consulta → Subjetivo/Objetivo (SOAP) → Abertura do Formulário do Pé → Registro nos 3 Eixos → Confirmação do Risco → Finalização e Disparo do Procedimento.
+      </li>
+      <li><strong>Dinâmica de Crazy Eights / Esboços Rápidos:</strong>
+        Cada integrante faz 8 esboços rápidos em 8 minutos de como os campos clicáveis por pé poderiam ser organizados visualmente (ex.: desenho do pé com botões vs. abas por eixo).
+      </li>
+      <li><strong>Arquitetura de Informação & Wireframes de Baixa Fidelidade:</strong>
+        Consolidar a melhor ideia em wireframes desenhados ou rascunhados, definindo claramente onde fica o botão de alternância entre monofilamento e Teste de Ipswich e onde o cálculo de risco é sugerido.
+      </li>
+    </ol>
+
+    <div class="box-method">
+      📖 <strong>Referência Metodológica:</strong> Livro <em>Desenvolvimento de Software Centrado no Usuário</em>, Capítulo 7 (Ideação) e Seção 7.3 (Esboços e Wireframes).
+    </div>
+  </article>
+</div>
+</body>
+</html>
