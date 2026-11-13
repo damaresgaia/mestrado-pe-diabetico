@@ -99,7 +99,7 @@
   .time-card {
     border: 2.8px solid var(--border-dark);
     border-radius: 18px;
-    padding: 24px 16px 20px;
+    padding: 24px 16px 20px 22px;
     position: relative;
     display: flex;
     flex-direction: column;
@@ -142,14 +142,13 @@
     transform: rotate(3deg);
   }
 
-  /* Círculo com o Número da Etapa na lateral esquerda */
+  /* Círculo com o Número da Etapa posicionado no rodapé inferior */
   .step-circle {
     position: absolute;
-    left: -18px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 38px;
-    height: 38px;
+    left: 14px;
+    bottom: -18px;
+    width: 36px;
+    height: 36px;
     border-radius: 50%;
     border: 2.5px solid var(--border-dark);
     display: flex;
@@ -157,7 +156,7 @@
     justify-content: center;
     font-family: 'Outfit', sans-serif;
     font-weight: 900;
-    font-size: 18px;
+    font-size: 17px;
     color: #0f172a;
     box-shadow: 2px 2px 0 var(--border-dark);
     z-index: 5;
@@ -208,7 +207,7 @@
   }
 
   /* Botão de Ação dentro do Card */
-  .card-action { margin-top: auto; }
+  .card-action { margin-top: auto; padding-left: 28px; }
   .btn-step {
     display: flex;
     align-items: center;
@@ -271,7 +270,6 @@
   }
   @media(max-width: 680px) {
     .timeline-columns { grid-template-columns: 1fr; gap: 28px; }
-    .step-circle { left: 14px; top: -16px; transform: none; }
     .shelf-grid { grid-template-columns: 1fr; }
   }
 </style>
