@@ -65,3 +65,4 @@ mestrado-analise-de-sistemas/
 * Sociedade Brasileira de Diabetes (SBD). Diretriz de Diagnostico e Prevencao de Ulceras no Pe Diabetico, 2026.
 * Brasil. Lei no 13.709, de 14 de agosto de 2018. Lei Geral de Protecao de Dados Pessoais (LGPD).
 * Wazlawick, R. S. et al. Desenvolvimento de Software Centrado no Usuario. Universidade Federal de Santa Catarina, 2025.
+
