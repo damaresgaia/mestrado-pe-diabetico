@@ -84,9 +84,9 @@
   /* Seta curva pontilhada conectora */
   .arrow-connector {
     position: absolute;
-    top: -30px;
+    top: -28px;
     left: 0;
-    right: 0;
+    width: 100%;
     height: 36px;
     pointer-events: none;
     display: none;
@@ -295,17 +295,22 @@
   <main class="timeline-container">
 
     <!-- SETAS PONTILHADAS CONECTIVAS SVG (EXIBIDAS EM TELAS LARGAS) -->
-    <svg class="arrow-connector" viewBox="0 0 1150 40" fill="none" preserveAspectRatio="none">
-      <!-- 1 -> 2 -->
-      <path d="M 120 30 Q 155 5, 250 25" stroke="#1e293b" stroke-width="2.5" stroke-dasharray="5 5" fill="none" marker-end="url(#arrow)"/>
-      <!-- 2 -> 3 -->
-      <path d="M 310 30 Q 345 5, 440 25" stroke="#1e293b" stroke-width="2.5" stroke-dasharray="5 5" fill="none"/>
-      <!-- 3 -> 4 -->
-      <path d="M 500 30 Q 535 5, 630 25" stroke="#1e293b" stroke-width="2.5" stroke-dasharray="5 5" fill="none"/>
-      <!-- 4 -> 5 -->
-      <path d="M 690 30 Q 725 5, 820 25" stroke="#1e293b" stroke-width="2.5" stroke-dasharray="5 5" fill="none"/>
-      <!-- 5 -> 6 -->
-      <path d="M 880 30 Q 915 5, 1010 25" stroke="#1e293b" stroke-width="2.5" stroke-dasharray="5 5" fill="none"/>
+    <svg class="arrow-connector" viewBox="0 0 100 30" preserveAspectRatio="none">
+      <defs>
+        <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#1e293b"/>
+        </marker>
+      </defs>
+      <!-- 1 -> 2 (de ~8.3% a ~25%) -->
+      <path d="M 9.5 24 Q 16.7 4, 23.5 22" stroke="#1e293b" stroke-width="0.75" stroke-dasharray="1.2 1.2" fill="none" marker-end="url(#arrow)"/>
+      <!-- 2 -> 3 (de ~25% a ~41.6%) -->
+      <path d="M 26.2 24 Q 33.4 4, 40.2 22" stroke="#1e293b" stroke-width="0.75" stroke-dasharray="1.2 1.2" fill="none" marker-end="url(#arrow)"/>
+      <!-- 3 -> 4 (de ~41.6% a ~58.3%) -->
+      <path d="M 42.8 24 Q 50.0 4, 56.8 22" stroke="#1e293b" stroke-width="0.75" stroke-dasharray="1.2 1.2" fill="none" marker-end="url(#arrow)"/>
+      <!-- 4 -> 5 (de ~58.3% a ~75%) -->
+      <path d="M 59.5 24 Q 66.7 4, 73.5 22" stroke="#1e293b" stroke-width="0.75" stroke-dasharray="1.2 1.2" fill="none" marker-end="url(#arrow)"/>
+      <!-- 5 -> 6 (de ~75% a ~91.6%) -->
+      <path d="M 76.2 24 Q 83.4 4, 90.2 22" stroke="#1e293b" stroke-width="0.75" stroke-dasharray="1.2 1.2" fill="none" marker-end="url(#arrow)"/>
     </svg>
 
     <div class="timeline-columns">
