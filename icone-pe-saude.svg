@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <!-- Fundo Circular Estilizado -->
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0284c7" />
+      <stop offset="100%" stop-color="#0f172a" />
+    </linearGradient>
+  </defs>
+  <circle cx="256" cy="256" r="240" fill="url(#bgGrad)" stroke="#38bdf8" stroke-width="12"/>
+
+  <!-- Cruz da Saúde / SUS no Fundo Suave -->
+  <path d="M226 130 h60 v60 h60 v60 h-60 v60 h-60 v-60 h-60 v-60 h60 z" fill="#38bdf8" opacity="0.35"/>
+
+  <!-- Silhueta da Pegada / Pé Diabético -->
+  <!-- Calcanhar -->
+  <ellipse cx="256" cy="340" rx="42" ry="52" fill="#ffffff"/>
+  
+  <!-- Região plantar / Arco médio e metatarso -->
+  <path d="M 218 320 C 210 270, 218 220, 240 190 C 265 190, 298 210, 296 280 C 295 320, 285 335, 276 345 Z" fill="#ffffff"/>
+  
+  <!-- Artelhos (Dedos) -->
+  <circle cx="230" cy="155" r="14" fill="#ffffff"/> <!-- Hálux (Dedo Maior) -->
+  <circle cx="252" cy="158" r="10.5" fill="#ffffff"/>
+  <circle cx="270" cy="165" r="9.5" fill="#ffffff"/>
+  <circle cx="286" cy="176" r="8.5" fill="#ffffff"/>
+  <circle cx="298" cy="190" r="7.5" fill="#ffffff"/> <!-- Dedo Menor -->
+
+  <!-- Alvo de Avaliação / Rastreamento Clínico Central (Sensor / Ponto de Toque) -->
+  <circle cx="260" cy="250" r="16" fill="#0284c7" stroke="#ffffff" stroke-width="4"/>
+  <circle cx="260" cy="250" r="6" fill="#38bdf8"/>
+</svg>
