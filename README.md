@@ -31,6 +31,9 @@ mestrado-analise-de-sistemas/
 │
 ├── index.html                   # Linha do tempo metodologica e portal do projeto
 │
+├── assets/                      # Icones, identidade visual e recursos estaticos
+│   └── icone-pe-saude.svg       # Icone tematico e favicon oficial do projeto
+│
 ├── etapas/                      # Paginas web dedicadas a cada fase metodologica
 │   ├── 01-briefing/             # Sintese do alinhamento com cliente e gestor
 │   ├── 02-imersao/              # Desk research e visualizador What's on your radar?
