@@ -156,10 +156,23 @@
     background: #fff; border: 1.5px solid var(--border-dark); box-shadow: 1px 1px 0 var(--border-dark);
   }
 
-  .card-moscow ul { list-style: square inside; display: grid; gap: 12px; }
-  .card-moscow li { font-size: 13.8px; }
+  .card-moscow ul { list-style: none; display: grid; gap: 14px; padding: 0; }
+  .card-moscow li {
+    font-size: 13.8px;
+    position: relative;
+    padding-left: 18px;
+  }
+  .card-moscow li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    top: -1px;
+    font-size: 20px;
+    line-height: 1.2;
+    color: var(--border-dark);
+  }
   .card-moscow li strong { color: var(--ink); display: block; margin-bottom: 2px; }
-  .card-moscow li span { color: #334155; font-size: 13px; }
+  .card-moscow li span { color: #334155; font-size: 13px; display: block; }
 
   /* Seção Matriz CSD */
   .csd-box {
