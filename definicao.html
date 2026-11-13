@@ -33,6 +33,13 @@
     --wont: #db2777;
     --wont-bg: #fdf2f8;
     --wont-border: #fbcfe8;
+
+    --csd-c: #059669;
+    --csd-c-bg: #ecfdf5;
+    --csd-s: #d97706;
+    --csd-s-bg: #fffbeb;
+    --csd-d: #dc2626;
+    --csd-d-bg: #fef2f2;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -180,17 +187,67 @@
   /* Nota Metodológica */
   .callout-notes {
     background: #fff; border-radius: 14px; padding: 18px 22px; border: 1px solid rgba(30,40,90,.1);
-    font-size: 13.5px; color: var(--ink);
+    font-size: 13.5px; color: var(--ink); margin-bottom: 40px;
   }
   .callout-notes strong { color: var(--line-deep); }
 
-  footer {
-    margin-top: 48px; padding-top: 24px; border-top: 1px solid rgba(30,40,90,.1);
-    font-size: 13px; color: var(--ink-soft); text-align: center;
+  /* Seção Matriz CSD 3ª versão */
+  .csd-section { margin-top: 20px; }
+  .csd-header-desc { margin-bottom: 20px; font-size: 14.5px; color: var(--ink-soft); }
+  .csd-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 32px; }
+  .csd-col {
+    background: var(--card); border-radius: 16px; padding: 20px 18px;
+    border: 1px solid rgba(255,255,255,.95); box-shadow: 0 10px 24px -16px rgba(30,40,90,.2);
   }
+  .csd-col-header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding-bottom: 12px; margin-bottom: 14px; border-bottom: 2px solid;
+  }
+  .csd-col-header h3 { font-family: 'Outfit'; font-size: 18px; }
+  .csd-badge-count { font-size: 12px; font-weight: 700; padding: 2px 8px; border-radius: 999px; }
+
+  .col-certezas { border-top: 5px solid var(--csd-c); }
+  .col-certezas .csd-col-header { border-color: var(--csd-c); color: var(--csd-c); }
+  .col-certezas .csd-badge-count { background: var(--csd-c-bg); color: var(--csd-c); border: 1px solid #a7f3d0; }
+
+  .col-suposicoes { border-top: 5px solid var(--csd-s); }
+  .col-suposicoes .csd-col-header { border-color: var(--csd-s); color: var(--csd-s); }
+  .col-suposicoes .csd-badge-count { background: var(--csd-s-bg); color: var(--csd-s); border: 1px solid #fde68a; }
+
+  .col-duvidas { border-top: 5px solid var(--csd-d); }
+  .col-duvidas .csd-col-header { border-color: var(--csd-d); color: var(--csd-d); }
+  .col-duvidas .csd-badge-count { background: var(--csd-d-bg); color: var(--csd-d); border: 1px solid #fecaca; }
+
+  .csd-list { list-style: none; display: grid; gap: 10px; }
+  .csd-item {
+    background: #fff; border-radius: 10px; padding: 12px 14px; font-size: 13.2px; line-height: 1.45;
+    border: 1px solid rgba(30,40,90,.07); box-shadow: 0 2px 6px rgba(30,40,90,.03);
+    position: relative;
+  }
+  .csd-item strong { display: block; color: var(--ink); margin-bottom: 3px; font-size: 13.5px; }
+  .csd-item span { color: var(--ink-soft); font-size: 12.3px; }
+  .tag-evolu {
+    display: inline-block; font-size: 10.5px; font-weight: 700; padding: 1px 6px; border-radius: 4px;
+    margin-bottom: 6px; text-transform: uppercase;
+  }
+  .tag-nova { background: #dbeafe; color: #1e40af; }
+  .tag-migrou { background: #dcfce7; color: #166534; }
+  .tag-ajustada { background: #fef3c7; color: #92400e; }
+  .tag-mantida { background: #f1f5f9; color: #475569; }
+
+  /* Tabela de Rastreabilidade */
+  .trace-box {
+    background: var(--card); border-radius: 16px; overflow: hidden;
+    border: 1px solid rgba(255,255,255,.95); box-shadow: 0 10px 24px -16px rgba(30,40,90,.2);
+    margin-top: 20px;
+  }
+  .trace-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .trace-table th { background: rgba(30,40,90,.05); text-align: left; padding: 12px 16px; font-weight: 600; color: var(--ink); }
+  .trace-table td { padding: 12px 16px; border-bottom: 1px solid rgba(30,40,90,.05); vertical-align: top; }
+  .trace-table tr:last-child td { border-bottom: none; }
 
   @media(max-width: 860px) {
-    .tools-flow, .steps-row, .moscow-grid, .persona-box { grid-template-columns: 1fr; }
+    .tools-flow, .steps-row, .moscow-grid, .persona-box, .csd-grid { grid-template-columns: 1fr; }
     .p-grid { grid-template-columns: 1fr; }
   }
 </style>
@@ -431,6 +488,173 @@
       <li><strong>O achado-chave da entrevista:</strong> A inteligência de dados sugere o risco, mas a profissional humana é quem valida, preservando sua autonomia clínica e assegurando a adesão ao PEC.</li>
     </ul>
   </div>
+
+  <!-- SEÇÃO MATRIZ CSD 3ª VERSÃO -->
+  <section class="csd-section" id="csd3">
+    <div class="badge" style="background: hsla(160, 84%, 39%, .15); color: #065f46;">Evolução Contínua do Conhecimento</div>
+    <h2 style="font-family: 'Outfit'; font-size: 26px; margin-top: 6px; margin-bottom: 8px;">Matriz CSD · 3ª Versão (Pós-Definição e MVP)</h2>
+    <p class="csd-header-desc">Consolidação das Certezas, Suposições e Dúvidas após a construção da Persona Camila Andrade, do Mapa de Empatia, do Canvas de Valor e do consenso do MoSCoW.</p>
+
+    <div class="csd-grid">
+      <!-- CERTEZAS -->
+      <div class="csd-col col-certezas">
+        <div class="csd-col-header">
+          <h3>Certezas</h3>
+          <span class="csd-badge-count">9 certezas</span>
+        </div>
+        <ul class="csd-list">
+          <li class="csd-item">
+            <span class="tag-evolu tag-mantida">Mantida</span>
+            <strong>Boa prática F vale 15 pontos no C4</strong>
+            <span>1 avaliação anual dos pés, restrita aos CBOs habilitados do Quadro 07 (Nota Metodológica C4).</span>
+          </li>
+          <li class="csd-item">
+            <span class="tag-evolu tag-mantida">Mantida</span>
+            <strong>PEC registra só texto livre e código SIGTAP</strong>
+            <span>Campo de 250 caracteres por perna sem qualquer classificação de risco clínica.</span>
+          </li>
+          <li class="csd-item">
+            <span class="tag-evolu tag-mantida">Mantida</span>
+            <strong>PCDT DM2 2026 adota o IWGDF 2023</strong>
+            <span>Estratificação de 0 a 3 é a norma federal vigente (Portaria SCTIE nº 13/2026).</span>
+          </li>
+          <li class="csd-item">
+            <span class="tag-evolu tag-mantida">Mantida</span>
+            <strong>Falta de instrumentos em UBSs da ponta</strong>
+            <span>Monofilamento e diapasão não são universais na atenção primária brasileira.</span>
+          </li>
+          <li class="csd-item">
+            <span class="tag-evolu tag-migrou">Virou Certeza</span>
+            <strong>Usuária-chave é a Enfermeira da ESF</strong>
+            <span>Persona Camila validada: é a enfermagem quem faz a rotina do exame; o médico entra nos casos agravados.</span>
+          </li>
+          <li class="csd-item">
+            <span class="tag-evolu tag-migrou">Virou Certeza</span>
+            <strong>A profissional humana quer e deve decidir</strong>
+            <span>O sistema sugere a categoria e a justificativa clínica, mas a enfermeira/médico confirma ou altera.</span>
+          </li>
+          <li class="csd-item">
+            <span class="tag-evolu tag-migrou">Virou Certeza</span>
+            <strong>Escopo delimitado 100% ao PEC e-SUS APS</strong>
+            <span>Sistemas municipais próprios (CELK) e apps externos foram classificados como Won't have no MoSCoW.</span>
+          </li>
+          <li class="csd-item">
+            <span class="tag-evolu tag-migrou">Virou Certeza</span>
+            <strong>Disparo automático do SIGTAP 03.01.04.009-5</strong>
+            <span>O código só deve ser lançado pelo PEC quando o exame estiver completo por profissional autorizado.</span>
+          </li>
+          <li class="csd-item">
+            <span class="tag-evolu tag-nova">Nova</span>
+            <strong>Dupla anotação é a principal fonte de ineficiência</strong>
+            <span>A usuária gasta tempo anotando na ficha de papel/pasta e redigitando texto livre no PEC.</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- SUPOSIÇÕES -->
+      <div class="csd-col col-suposicoes">
+        <div class="csd-col-header">
+          <h3>Suposições</h3>
+          <span class="csd-badge-count">5 suposições</span>
+        </div>
+        <ul class="csd-list">
+          <li class="csd-item">
+            <span class="tag-evolu tag-ajustada">Reforçada</span>
+            <strong>Formulário clicável em 4 passos cabe na consulta</strong>
+            <span>Supõe-se que botões de clique rápido reduzem o tempo de registro para menos de 2 minutos, viabilizando o exame na rotina cheia.</span>
+          </li>
+          <li class="csd-item">
+            <span class="tag-evolu tag-ajustada">Reforçada</span>
+            <strong>Profissional confia na sugestão explicada</strong>
+            <span>A indicação clara do motivo (ex.: "Risco 2 por PSP + Deformidade") gera transparência e adesão ao algoritmo do IWGDF.</span>
+          </li>
+          <li class="csd-item">
+            <span class="tag-evolu tag-ajustada">Reforçada</span>
+            <strong>Código é lançado hoje sem exame completo</strong>
+            <span>Por pressão de metas e falta de campos clínicos, o procedimento é faturado sem que o pé tenha sido avaliado nos 3 eixos.</span>
+          </li>
+          <li class="csd-item">
+            <span class="tag-evolu tag-nova">Nova</span>
+            <strong>Aviso sobre o teste de Ipswich incentiva adesão segura</strong>
+            <span>O aviso clínico de que o IpTT é contingencial no Should have educa o profissional sem bloquear o atendimento da UBS sem recursos.</span>
+          </li>
+          <li class="csd-item">
+            <span class="tag-evolu tag-mantida">Mantida</span>
+            <strong>A busca ativa no PEC aumentará o retorno no prazo</strong>
+            <span>Com o risco gravado no prontuário, a equipe e o ACS conseguirão resgatar pacientes de alto risco (graus 2 e 3) antes de complicarem.</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- DÚVIDAS -->
+      <div class="csd-col col-duvidas">
+        <div class="csd-col-header">
+          <h3>Dúvidas</h3>
+          <span class="csd-badge-count">4 dúvidas</span>
+        </div>
+        <ul class="csd-list">
+          <li class="csd-item">
+            <span class="tag-evolu tag-mantida">Mantida</span>
+            <strong>Qual é o cumprimento real da boa prática F no Brasil?</strong>
+            <span>Depende de extração agregada de dados nacionais do SISAB/Datasus para mensurar a linha de base.</span>
+          </li>
+          <li class="csd-item">
+            <span class="tag-evolu tag-mantida">Mantida</span>
+            <strong>A rotina da Camila se repete igualmente em grandes centros urbanos?</strong>
+            <span>A persona baseia-se em UBS com área rural; a dinâmica em capitais com equipes de apoio e residência pode variar.</span>
+          </li>
+          <li class="csd-item">
+            <span class="tag-evolu tag-mantida">Mantida</span>
+            <strong>Os médicos aceitarão preencher o mesmo formulário da enfermagem?</strong>
+            <span>Investigar na prototipação e validação se o fluxo de atendimento médico no SOAP aceita bem o componente compartilhado.</span>
+          </li>
+          <li class="csd-item">
+            <span class="tag-evolu tag-nova">Nova</span>
+            <strong>Qual a taxa de divergência entre a sugestão do sistema e a decisão clínica?</strong>
+            <span>Medir quantas vezes a profissional altera a categoria sugerida pelo IWGDF durante a fase de validação do protótipo.</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- TABELA DE RASTREABILIDADE -->
+    <div class="trace-box">
+      <div style="padding: 16px 20px; background: rgba(30,40,90,.03); border-bottom: 1px solid rgba(30,40,90,.08);">
+        <strong style="font-size: 14px; color: var(--ink);">Rastreabilidade: Da CSD 2ª versão para a 3ª versão (O que a Definição mudou)</strong>
+      </div>
+      <table class="trace-table">
+        <thead>
+          <tr>
+            <th>Item na CSD 2ª versão</th>
+            <th>Status na CSD 3ª versão</th>
+            <th>Evidência / Decisão de Projeto</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>D:</strong> A solução vale só para o PEC ou também sistemas próprios (CELK)?</td>
+            <td><span class="tag-evolu tag-migrou">Virou Certeza</span></td>
+            <td>MoSCoW consensual: integração com sistemas próprios classificada como <strong>Won't have</strong> para viabilizar o MVP.</td>
+          </tr>
+          <tr>
+            <td><strong>S:</strong> Profissionais confiariam num risco calculado pelo sistema?</td>
+            <td><span class="tag-evolu tag-migrou">Virou Certeza</span> (com ajuste)</td>
+            <td>Entrevista (P13) e Persona: a profissional confia desde que o sistema <strong>sugira e ela confirme/altere</strong> (Passo 3 do MVP).</td>
+          </tr>
+          <tr>
+            <td><strong>D:</strong> Quem faz o exame na prática?</td>
+            <td><span class="tag-evolu tag-migrou">Virou Certeza</span></td>
+            <td>Persona Camila Andrade formalizada como usuária primária (enfermeira da ESF); médico nos casos agravados.</td>
+          </tr>
+          <tr>
+            <td><strong>S:</strong> Um formulário com botões clicáveis rápidos aumentará a adesão?</td>
+            <td><span class="tag-evolu tag-ajustada">Reforçada no MVP</span></td>
+            <td>Canvas de Valor: campos clicáveis por pé são o analgésico direto da dor de digitar em 250 caracteres na consulta corrida.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
 
   <footer>
     Universidade Federal de Santa Catarina · Mestrado Profissional em Informática em Saúde · Análise de Sistemas e UML
